@@ -1,0 +1,149 @@
+body {
+    margin: 0;
+    padding: 0;
+    color: #fff; /* 確保全局文字為白色 */
+    background-color: #000; /* 避免空白區域 */
+}
+
+html {
+    scroll-behavior: smooth; /* 平滑滾動 */
+}
+
+/* 輪播區域樣式 */
+.carousel-section {
+    height: 60vh; /* 保留高度 */
+    width: 100%; /* 拉伸到螢幕全寬 */
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-item {
+    height: 60vh; /* 與輪播區域高度一致 */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.carousel-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 半透明覆蓋層 */
+    z-index: 1;
+}
+
+.carousel-content {
+    position: relative;
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+    z-index: 2;
+}
+
+.carousel-content h2 {
+    font-size: 2rem; /* 縮小標題字體 */
+    margin-bottom: 15px;
+    color: #fff; /* 明確設置為白色 */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* 減輕陰影 */
+}
+
+.carousel-content p {
+    font-size: 1rem; /* 縮小描述字體 */
+    color: #fff; /* 明確設置為白色 */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* 減輕陰影 */
+}
+
+/* 固定導航按鈕 */
+.menu-buttons {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+    z-index: 1000;
+}
+
+.menu-buttons button {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    background-color: #28a745;
+    border: none;
+    border-radius: 8px;
+    transition: transform 0.2s, background-color 0.3s;
+}
+
+.menu-buttons button:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+.expiry-recipes-section {
+    background: linear-gradient(to right, #fff5e6, #ffe6e6);
+    padding: 40px 20px;
+    border-radius: 15px;
+    margin: 40px auto;
+    max-width: 1100px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.expiry-recipes-section h2 {
+    text-align: center;
+    color: #cc3300;
+    font-weight: bold;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    letter-spacing: 1px;
+}
+
+.recipe-card {
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 30px;
+}
+
+.recipe-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+.recipe-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.card-title {
+    font-size: 1.2rem;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    font-size: 0.95rem;
+    color: #666;
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

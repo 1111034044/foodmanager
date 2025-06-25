@@ -1,0 +1,33 @@
+body {
+    background-color: #fce9c5 !important;
+    font-family: Arial, sans-serif;
+}
+
+.navbar {
+    background-color: #f8dada !important;
+}
+
+.login-container {
+    max-width: 400px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.register-container {
+    max-width: 400px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn-custom {
+    background-color: #ff6b6b;
+    color: white;
+}
+
+.btn-custom:hover {
+    background-color: #e63946;
+}

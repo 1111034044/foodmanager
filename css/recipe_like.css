@@ -1,0 +1,50 @@
+/* 愛心按鈕 hover 動畫與樣式 */
+.card-footer form .btn-link {
+    transition: transform 0.2s ease, color 0.2s ease;
+    font-size: 1.5rem;
+    padding: 0;
+}
+
+.card-footer form .btn-link:hover {
+    transform: scale(1.2);
+    color: crimson !important;
+}
+
+/* 收藏按鈕（星星）獨立樣式 */
+.card-footer form .favorite-btn {
+    transition: transform 0.2s ease, color 0.2s ease;
+    font-size: 1.5rem;
+    padding: 0;
+}
+/* 收藏按鈕（書籤圖示）獨立樣式 */
+.card-footer form .favorite-btn {
+    transition: transform 0.2s ease, color 0.2s ease;
+    font-size: 1.5rem;
+    padding: 0;
+    color: #0d6efd ;
+}
+/* 收藏按鈕 - 已收藏狀態顯示藍色 */
+.card-footer form .favorite-btn.favorited {
+    color: #0d6efd !important; /* 藍色，與 hover 一致 */
+}
+
+
+/* 收藏按鈕 hover 效果變藍色 */
+.card-footer form .favorite-btn:hover {
+    transform: scale(1.2);
+    color: #0d6efd !important; /* Bootstrap 藍色主色 */
+}
+
+
+/* 點讚數字樣式 */
+.card-footer form span {
+    margin-left: 6px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #666;
+    transition: color 0.2s ease;
+}
+
+.card-footer form span.liked {
+    color: red;
+}

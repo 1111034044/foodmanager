@@ -1,0 +1,73 @@
+/* 隨機食譜區域 */
+.black {
+    color: #000; /* 將隨機推薦食譜標題設為黑色 */
+}
+
+.random-recipes-section {
+    width: 90%;
+    margin: 40px auto;
+    text-align: center;
+}
+
+.random-recipes-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+.recipe-card {
+    background-color: #222;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    color: #fff;
+}
+
+.recipe-card:hover {
+    transform: scale(1.05);
+}
+
+.recipe-card img {
+    height: 200px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.recipe-card .card-body {
+    padding: 15px;
+}
+
+.recipe-card .card-title {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.recipe-card .card-text {
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+.lucky-button {
+    background-color: #007bff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-bottom: 20px;
+}
+
+.lucky-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* 淡入淡出動畫 */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
