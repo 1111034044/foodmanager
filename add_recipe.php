@@ -1,6 +1,5 @@
 <?php
 session_start(); // 啟動 session
-
 // 檢查用戶是否已登入
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php"); // 未登入則跳轉到登入頁面
