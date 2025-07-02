@@ -2,17 +2,14 @@
 session_start(); // 啟動 session
 
 $conn = new mysqli("localhost", "root", "", "foodmanager");
-
 if ($conn->connect_error) {
     die("連線失敗: " . $conn->connect_error);
 }
 
-// 處理登入表單提交
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // 防止 SQL 注入，使用 prepared statement
     $stmt = $conn->prepare("SELECT uId, uName, Password FROM user WHERE Email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
@@ -20,13 +17,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        // 驗證密碼
+
         if (password_verify($password, $row['Password'])) {
-            // 登入成功，設定 session 變數
-            $_SESSION['user_id'] = $row['uId'];
-            $_SESSION['user_name'] = $row['uName'];
+            // 驗證成功，但不直接登入，先暫存帳戶資訊
+            $_SESSION['temp_user_id'] = $row['uId'];
+            $_SESSION['temp_user_name'] = $row['uName'];
             $stmt->close();
-            header("Location: index.php"); // 登入成功後跳轉到首頁
+            header("Location: select_family_role.php");
             exit();
         } else {
             echo "<script>alert('密碼錯誤');</script>";
@@ -37,7 +34,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->close();
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -76,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- 登入表單 -->
     <div class="container d-flex justify-content-center align-items-center vh-100">
         <div class="login-container">
-            <h3 class="text-center">登入</h3>
+            <h3 class="text-center mb-4">登入</h3>
             <form method="POST">
                 <div class="mb-3">
                     <label for="email" class="form-label">電子郵件</label>

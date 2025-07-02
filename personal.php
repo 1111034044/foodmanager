@@ -13,6 +13,9 @@ if ($conn->connect_error) {
 
 $uId = $_SESSION['user_id'];
 
+// 獲取當前登錄身份
+$user_role = isset($_SESSION['user_role']) ? $_SESSION['user_role'] : '未知身份';
+
 // 查詢用戶資料（保持不變）
 $stmt = $conn->prepare("SELECT uName, Email, uImage FROM user WHERE uId = ?");
 $stmt->bind_param("i", $uId);
@@ -257,6 +260,9 @@ $conn->close();
             <div class="mb-3">
                 <label class="form-label">電子郵件</label>
                 <input type="email" class="form-control" value="<?php echo htmlspecialchars($email); ?>" readonly>
+            <div class="mb-3">
+                <label class="form-label">目前身份</label>
+                <input type="text" class="form-control" value="<?= htmlspecialchars($user_role) ?>" readonly>
             </div>
 
             <!-- 修改密碼 -->

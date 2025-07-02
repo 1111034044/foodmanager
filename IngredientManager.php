@@ -25,9 +25,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_ingredient'])) {
     $expireDate = $_POST['expireDate'] ? $_POST['expireDate'] : NULL;
     $storeType = $_POST['storeType'] ? $_POST['storeType'] : NULL;
     $purchaseDate = $_POST['purchaseDate'] ? $_POST['purchaseDate'] : NULL;
-
-    $stmt = $conn->prepare("INSERT INTO Ingredient (uId, IName, Quantity, Unit, ExpireDate, StoreType, PurchaseDate) VALUES (?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("isissss", $uId, $iName, $quantity, $unit, $expireDate, $storeType, $purchaseDate);
+    $role = $_SESSION['user_role'] ?? '未指定'; // ✅ 加在第 30 行左右
+    $stmt = $conn->prepare("INSERT INTO Ingredient (uId, IName, Quantity, Unit, ExpireDate, StoreType, PurchaseDate, Role) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("isisssss", $uId, $iName, $quantity, $unit, $expireDate, $storeType, $purchaseDate, $role);
 
     if ($stmt->execute()) {
         header("Location: IngredientManager.php");
@@ -100,14 +100,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['use_ingredient'])) {
     } else {
         $newQuantity = $currentQuantity - $usedQuantity;
 
-        $stmt = $conn->prepare("UPDATE Ingredient SET Quantity = ? WHERE IngredientId = ? AND uId = ?");
-        if ($stmt === false) {
-            die("Prepare失敗: " . htmlspecialchars($conn->error));
-        }
-        $stmt->bind_param("iii", $newQuantity, $ingredientId, $uId);
+        $role = $_SESSION['user_role'] ?? '未指定'; // ✅ 加在這裡
+        $stmt = $conn->prepare("INSERT INTO IngredientUsage (IngredientId, uId, UsedQuantity, Unit, UsageDate, Note, Role) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("iiissss", $ingredientId, $uId, $usedQuantity, $unit, $usageDate, $note, $role);
         $stmt->execute();
-        $stmt->close();
-
+        $stmt->close(); 
+        
         $stmt = $conn->prepare("INSERT INTO IngredientUsage (IngredientId, uId, UsedQuantity, Unit, UsageDate, Note) VALUES (?, ?, ?, ?, ?, ?)");
         if ($stmt === false) {
             die("Prepare失敗: " . htmlspecialchars($conn->error));
@@ -132,7 +130,7 @@ $sortColumn = $validSorts[$sort] ?? 'ExpireDate';
 $order = strtolower($order) === 'desc' ? 'DESC' : 'ASC';
 
 // 使用 LIKE 進行名稱模糊搜尋
-$sql = "SELECT IngredientId, IName, Quantity, Unit, ExpireDate, StoreType, PurchaseDate
+$sql = "SELECT IngredientId, IName, Quantity, Unit, ExpireDate, StoreType, PurchaseDate, Role
         FROM Ingredient
         WHERE uId = ? AND Quantity > 0 AND IName LIKE ?
         ORDER BY $sortColumn $order";
@@ -376,11 +374,15 @@ $conn->close();
                     $quantityDisplay = $ingredient['Quantity'] ? $ingredient['Quantity'] : '-';
                     $purchaseDateDisplay = $ingredient['PurchaseDate'] ? $ingredient['PurchaseDate'] : '-';
                     $storeTypeDisplay = $ingredient['StoreType'] ? $ingredient['StoreType'] : '-';
+                    $whoAdded = $ingredient['Role'] ?? '未知身份'; // ✅ 放在每筆列印區塊前
+
                     ?>
                     <div class="list-group-item <?php echo $expireClass; ?>">
                         <div class="row align-items-center">
                             <div class="col-3">
                                 <?php echo htmlspecialchars($ingredient['IName']); ?>
+                                <br>
+                                <small class="text-muted">身份：<?php echo htmlspecialchars($whoAdded); ?></small>
                             </div>
                             <div class="col-1 text-center">
                                 <?php echo htmlspecialchars($quantityDisplay); ?>
