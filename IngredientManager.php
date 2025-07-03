@@ -30,6 +30,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_ingredient'])) {
     $stmt->bind_param("isisssss", $uId, $iName, $quantity, $unit, $expireDate, $storeType, $purchaseDate, $role);
 
     if ($stmt->execute()) {
+        // 添加通知
+        $ingredientId = $conn->insert_id;
+        $role = $_SESSION['user_role'] ?? '未指定';
+        $stmt = $conn->prepare("INSERT INTO notifications (user_id, type, content, item_id, item_name, role) VALUES (?, 'ingredient', '新增了食材', ?, ?, ?)");
+        $stmt->bind_param("iiss", $uId, $ingredientId, $iName, $role);
+        $stmt->execute();
+        
         header("Location: IngredientManager.php");
         exit();
     } else {

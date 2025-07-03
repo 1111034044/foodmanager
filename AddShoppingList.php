@@ -46,6 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_shopping_list'])) 
     }
 
     // 插入 ShoppingList 表
+    // 插入 ShoppingList 表
     $stmt = $conn->prepare("INSERT INTO ShoppingList (uId, ListName, CreateDate, IsCompleted) VALUES (?, ?, CURDATE(), 0)");
     if ($stmt === false) {
         $error_message = "SQL 準備失敗 (ShoppingList): " . $conn->error;
@@ -59,7 +60,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_shopping_list'])) 
     }
     $shoppingId = $conn->insert_id;
     $stmt->close();
-
+    
+    // 添加通知
+    $role = $_SESSION['user_role'] ?? '未指定';
+    $stmt = $conn->prepare("INSERT INTO notifications (user_id, type, content, item_id, item_name, role) VALUES (?, 'shopping', '新增了購物清單', ?, ?, ?)");
+    $stmt->bind_param("iiss", $uId, $shoppingId, $listName, $role);
+    $stmt->execute();
+    $stmt->close();
+    
     // 批量插入 ShoppingItem 表
     $stmt = $conn->prepare("INSERT INTO ShoppingItem (ShoppingId, IngredientName, Quantity, Price, Unit) VALUES (?, ?, ?, ?, ?)");
     if ($stmt === false) {

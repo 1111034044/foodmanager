@@ -84,6 +84,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_recipe'])) {
     $recipeId = $stmt->insert_id;
     $stmt->close();
 
+    // 添加通知
+    $role = $_SESSION['user_role'] ?? '未指定';
+    $stmt = $conn->prepare("INSERT INTO notifications (user_id, type, content, item_id, item_name, role) VALUES (?, 'recipe', '新增了食譜', ?, ?, ?)");
+    $stmt->bind_param("iiss", $uId, $recipeId, $rName, $role);
+    $stmt->execute();
+    $stmt->close();
+
     // 插入標籤（RecipeTags）
     if (!empty($_POST['tags'])) {
         $tags = explode(',', $_POST['tags']);

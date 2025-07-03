@@ -384,3 +384,35 @@ $conn->close();
 </body>
 
 </html>
+<head>
+    <!-- 現有的 head 內容 -->
+    <style>
+        /* 現有的樣式 */
+        
+        /* 通知樣式 */
+        .notification-dropdown {
+            padding: 0;
+        }
+        
+        .notification-dropdown .dropdown-header {
+            background-color: #f8f9fa;
+            padding: 10px 15px;
+            font-weight: bold;
+        }
+        
+        .notification-item {
+            padding: 10px 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+        
+        .notification-item:hover {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+</body>
+</html>
