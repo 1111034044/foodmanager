@@ -78,6 +78,8 @@ $conn->close();
     <link rel="stylesheet" href="css/get_random_recipes.css">
     <link rel="stylesheet" href="css/index.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 添加 Bootstrap Icons 引用 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <style>
         .recipe-card {
             background-color: #f8f9fa !important; /* 淺灰色背景 */
@@ -385,7 +387,6 @@ $conn->close();
 
 </html>
 <head>
-    <!-- 現有的 head 內容 -->
     <style>
         /* 現有的樣式 */
         

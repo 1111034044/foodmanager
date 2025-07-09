@@ -28,8 +28,9 @@ if (isset($_SESSION['user_id']) && isset($conn)) {
     }
     
     // 獲取未讀通知數量
-    $stmt = $conn->prepare("SELECT COUNT(*) as count FROM notifications WHERE is_read = 0");
+    $stmt = $conn->prepare("SELECT COUNT(*) as count FROM notifications WHERE is_read = 0 AND user_id = ?");
     if ($stmt) {
+        $stmt->bind_param("i", $uId);
         $stmt->execute();
         $result = $stmt->get_result();
         if ($row = $result->fetch_assoc()) {

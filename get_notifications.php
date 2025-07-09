@@ -17,7 +17,9 @@ if ($conn->connect_error) {
 // 獲取最新的5條通知
 $stmt = $conn->prepare("SELECT n.*, n.role as user_role 
                        FROM notifications n 
+                       WHERE n.user_id = ? 
                        ORDER BY n.created_at DESC LIMIT 5");
+$stmt->bind_param("i", $_SESSION['user_id']);
 $stmt->execute();
 $result = $stmt->get_result();
 
