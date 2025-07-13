@@ -19,6 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $_SESSION['user_id'] = $userId;
         $_SESSION['user_name'] = $userName;
         $_SESSION['user_role'] = $_POST['role'];
+        $_SESSION['uId'] = $userId; // 統一全站登入判斷
         unset($_SESSION['temp_user_id'], $_SESSION['temp_user_name']);
         header("Location: index.php");
         exit();

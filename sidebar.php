@@ -14,5 +14,6 @@
         <a href="add_recipe.php">新增食譜</a>
         <a href="ShoppingList.php">購物清單</a>
         <a href="ingredient_analysis.php">分析圖表</a>
+        <a href="calorie_tracker.php">熱量紀錄</a>
     </div>
 </div>
