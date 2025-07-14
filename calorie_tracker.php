@@ -35,21 +35,23 @@ $over = $goal_cal && $total_cal > $goal_cal;
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/boot.css">
     <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <style>
         body { background: #f8fafc; }
         .progress-bar.over { background-color: #dc3545 !important; }
         .food-list td, .food-list th { vertical-align: middle; }
+        .food-list th { color: #333 !important; font-weight: bold; font-size: 1.08rem; }
         .card { box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
         .main-title { color: #fc8181; font-weight: bold; }
+        .form-label { color: #333 !important; font-weight: bold; }
+        .mb-2 > span, .mb-2 { color: #333 !important; font-weight: bold; font-size: 1.08rem; }
         .btn-main { background: #fc8181; color: #fff; }
         .btn-main:hover { background: #ff6b6b; color: #fff; }
     </style>
 </head>
 <body>
-<?php include 'navbar.php'; ?>
-<?php include 'sidebar.php'; ?>
+    <?php include 'navbar.php'; ?>
+    <?php include 'sidebar.php'; ?>
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2 class="main-title">每日熱量紀錄</h2>
@@ -74,7 +76,10 @@ $over = $goal_cal && $total_cal > $goal_cal;
             </div>
             <div class="col-md-4">
                 <label for="calorie" class="form-label">熱量 (kcal)</label>
-                <input type="number" class="form-control" id="calorie" name="calorie" min="0" step="0.1" required placeholder="自動帶入或手動輸入">
+                <div class="input-group">
+                    <input type="number" class="form-control" id="calorie" name="calorie" min="0" step="0.1" required placeholder="自動帶入或手動輸入">
+                    <button type="button" class="btn btn-outline-secondary" id="queryCalorieBtn">查詢熱量</button>
+                </div>
             </div>
             <div class="col-12 mt-2">
                 <button type="submit" class="btn btn-main w-100">新增紀錄</button>
@@ -186,28 +191,20 @@ $('#foodName').autocomplete({
             $('#calorie').val(ui.item.kcal).prop('readonly', true);
             $('#foodSearchHint').addClass('d-none');
         } else {
-            // 沒有熱量，呼叫 API 查詢
-            $.get('search_nutrition.php', { food: ui.item.value }, function(res) {
-                if (res.found || res.openai) {
-                    $('#calorie').val(res.kcal).prop('readonly', true);
-                    $('#foodSearchHint').addClass('d-none');
-                } else {
-                    $('#calorie').val('').prop('readonly', false);
-                    $('#foodSearchHint').removeClass('d-none');
-                }
-            }, 'json');
+            $('#calorie').val('').prop('readonly', false);
+            $('#foodSearchHint').removeClass('d-none');
         }
         return false;
     },
     minLength: 1
 });
-// 若直接輸入食物名稱，離開欄位時查詢
+// 若直接輸入食物名稱，離開欄位時查詢本地資料庫
 $('#foodName').on('blur', function() {
     var name = $(this).val().trim();
     if (!name) return;
-    $.get('search_nutrition.php', { food: name }, function(res) {
-        if (res.found || res.openai) {
-            $('#calorie').val(res.kcal).prop('readonly', true);
+    $.get('search_food_autocomplete.php', { term: name }, function(data) {
+        if (data && data.length > 0 && data[0].kcal) {
+            $('#calorie').val(data[0].kcal).prop('readonly', true);
             $('#foodSearchHint').addClass('d-none');
         } else {
             $('#calorie').val('').prop('readonly', false);
@@ -252,7 +249,11 @@ $('#goalForm').on('submit', function(e) {
         location.reload();
     });
 });
+// 查詢熱量按鈕
+$('#queryCalorieBtn').on('click', function() {
+    // 僅保留按鈕存在，不執行任何查詢動作
+    alert('此功能已暫停，請自行輸入熱量。');
+});
 </script>
 </body>
-</html> 
 </html> 
