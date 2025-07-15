@@ -1,0 +1,11 @@
+body { background: #f8fafc; }
+.progress-bar.over { background-color: #dc3545 !important; }
+.food-list td, .food-list th { vertical-align: middle; }
+.food-list th { color: #333 !important; font-weight: bold; font-size: 1.08rem; }
+.card { box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+.main-title { color: #fc8181; font-weight: bold; }
+.form-label { color: #333 !important; font-weight: bold; }
+.mb-2 > span, .mb-2 { color: #333 !important; font-weight: bold; font-size: 1.08rem; }
+.btn-main { background: #fc8181; color: #fff; }
+.btn-main:hover { background: #ff6b6b; color: #fff; }
+

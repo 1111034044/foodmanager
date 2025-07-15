@@ -35,19 +35,9 @@ $over = $goal_cal && $total_cal > $goal_cal;
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/boot.css">
     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/calorie_tracker.css">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-    <style>
-        body { background: #f8fafc; }
-        .progress-bar.over { background-color: #dc3545 !important; }
-        .food-list td, .food-list th { vertical-align: middle; }
-        .food-list th { color: #333 !important; font-weight: bold; font-size: 1.08rem; }
-        .card { box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
-        .main-title { color: #fc8181; font-weight: bold; }
-        .form-label { color: #333 !important; font-weight: bold; }
-        .mb-2 > span, .mb-2 { color: #333 !important; font-weight: bold; font-size: 1.08rem; }
-        .btn-main { background: #fc8181; color: #fff; }
-        .btn-main:hover { background: #ff6b6b; color: #fff; }
-    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 <body>
     <?php include 'navbar.php'; ?>
