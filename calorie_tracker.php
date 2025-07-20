@@ -26,6 +26,14 @@ foreach ($records as $r) {
 $goal_cal = $goal ? $goal['calorie_goal'] : 0;
 $progress = $goal_cal ? min(100, round($total_cal / $goal_cal * 100)) : 0;
 $over = $goal_cal && $total_cal > $goal_cal;
+// 進度條顏色
+if ($progress <= 50) {
+    $progress_class = 'bg-success';
+} elseif ($progress <= 80) {
+    $progress_class = 'bg-warning';
+} else {
+    $progress_class = 'bg-danger';
+}
 ?>
 <!DOCTYPE html>
 <html lang="zh-Hant">
@@ -80,7 +88,7 @@ $over = $goal_cal && $total_cal > $goal_cal;
     <div class="mb-4">
         <div class="mb-2">今日總熱量：<span class="fw-bold fs-5 text-<?= $over ? 'danger' : 'success' ?>"><?= $total_cal ?> kcal</span></div>
         <div class="progress" style="height: 30px;">
-            <div class="progress-bar<?= $over ? ' over' : '' ?>" role="progressbar" style="width: <?= $progress ?>%;" aria-valuenow="<?= $progress ?>" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar <?= $progress_class ?>" role="progressbar" style="width: <?= $progress ?>%;" aria-valuenow="<?= $progress ?>" aria-valuemin="0" aria-valuemax="100">
                 <?= $progress ?>%
             </div>
         </div>
