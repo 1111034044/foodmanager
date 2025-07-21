@@ -25,7 +25,7 @@ $labels = [];
 $values = [];
 foreach ($data as $row) {
     $labels[] = $row['record_date'];
-    $values[] = $row['total'];
+    $values[] = round($row['total'], 1);
 }
 ?>
 <!DOCTYPE html>
@@ -84,7 +84,7 @@ foreach ($data as $row) {
                 <?php foreach ($data as $row): ?>
                     <tr>
                         <td><?= $row['record_date'] ?></td>
-                        <td><?= $row['total'] ?> kcal</td>
+                        <td><?= round($row['total'], 1) ?> kcal</td>
                         <td><?= $goal_cal && $row['total'] > $goal_cal ? '<span class="text-danger">超標</span>' : '<span class="text-success">正常</span>' ?></td>
                         <td><a href="?start=<?= $row['record_date'] ?>&end=<?= $row['record_date'] ?>" class="btn btn-sm btn-outline-primary">查看</a></td>
                     </tr>

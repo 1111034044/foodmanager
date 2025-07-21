@@ -72,7 +72,11 @@ if ($progress <= 50) {
                 <label for="foodName" class="form-label">食物名稱</label>
                 <input type="text" class="form-control" id="foodName" name="food_name" required autocomplete="off" placeholder="請輸入或選擇食物">
             </div>
-            <div class="col-md-4">
+            <div class="col-md-2">
+                <label for="quantity" class="form-label">數量</label>
+                <input type="number" class="form-control" id="quantity" name="quantity" min="1" value="1" required>
+            </div>
+            <div class="col-md-2">
                 <label for="calorie" class="form-label">熱量 (kcal)</label>
                 <div class="input-group">
                     <input type="number" class="form-control" id="calorie" name="calorie" min="0" step="0.1" required placeholder="自動帶入或手動輸入">
@@ -103,6 +107,7 @@ if ($progress <= 50) {
                 <thead class="table-light">
                     <tr>
                         <th>食物名稱</th>
+                        <th>數量</th>
                         <th>熱量 (kcal)</th>
                         <th>時間</th>
                         <th>操作</th>
@@ -112,6 +117,7 @@ if ($progress <= 50) {
                 <?php foreach ($records as $r): ?>
                     <tr>
                         <td><?= htmlspecialchars($r['food_name']) ?></td>
+                        <td><?= isset($r['quantity']) ? $r['quantity'] : 1 ?></td>
                         <td><?= $r['calorie'] ?></td>
                         <td><?= date('H:i', strtotime($r['created_at'])) ?></td>
                         <td>
@@ -176,7 +182,9 @@ if ($progress <= 50) {
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
 <script>
-// 食物 autocomplete
+// 單份熱量暫存
+var singleKcal = null;
+
 $('#foodName').autocomplete({
     source: function(request, response) {
         $.get('search_food_autocomplete.php', { term: request.term }, function(data) {
@@ -186,9 +194,12 @@ $('#foodName').autocomplete({
     select: function(event, ui) {
         $('#foodName').val(ui.item.value);
         if (ui.item.kcal) {
-            $('#calorie').val(ui.item.kcal).prop('readonly', true);
+            singleKcal = parseFloat(ui.item.kcal);
+            var qty = parseFloat($('#quantity').val()) || 1;
+            $('#calorie').val((singleKcal * qty).toFixed(1)).prop('readonly', true);
             $('#foodSearchHint').addClass('d-none');
         } else {
+            singleKcal = null;
             $('#calorie').val('').prop('readonly', false);
             $('#foodSearchHint').removeClass('d-none');
         }
@@ -202,13 +213,23 @@ $('#foodName').on('blur', function() {
     if (!name) return;
     $.get('search_food_autocomplete.php', { term: name }, function(data) {
         if (data && data.length > 0 && data[0].kcal) {
-            $('#calorie').val(data[0].kcal).prop('readonly', true);
+            singleKcal = parseFloat(data[0].kcal);
+            var qty = parseFloat($('#quantity').val()) || 1;
+            $('#calorie').val((singleKcal * qty).toFixed(1)).prop('readonly', true);
             $('#foodSearchHint').addClass('d-none');
         } else {
+            singleKcal = null;
             $('#calorie').val('').prop('readonly', false);
             $('#foodSearchHint').removeClass('d-none');
         }
     }, 'json');
+});
+// 數量變動時自動更新熱量
+$('#quantity').on('input change', function() {
+    var qty = parseFloat($(this).val()) || 1;
+    if (singleKcal !== null) {
+        $('#calorie').val((singleKcal * qty).toFixed(1));
+    }
 });
 // 新增紀錄
 $('#foodForm').on('submit', function(e) {
