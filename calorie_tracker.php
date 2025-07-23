@@ -181,6 +181,7 @@ if ($progress <= 50) {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+<script src="search_calories.js"></script>
 <script>
 // 單份熱量暫存
 var singleKcal = null;
@@ -270,8 +271,9 @@ $('#goalForm').on('submit', function(e) {
 });
 // 查詢熱量按鈕
 $('#queryCalorieBtn').on('click', function() {
-    // 僅保留按鈕存在，不執行任何查詢動作
-    alert('此功能已暫停，請自行輸入熱量。');
+    var food = $('#foodName').val().trim();
+    var qty = $('#quantity').val().trim();
+    queryCalorieByGPT(food, qty, '#queryCalorieBtn', '#calorie', '#foodSearchHint');
 });
 </script>
 </body>
