@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 function toggleSidebar() {
     const sidebar = document.querySelector(".sidebar");
     sidebar.classList.toggle("active");
@@ -53,7 +53,7 @@ window.queryCalorieByGPT = async function(food, qty, btnSelector, calorieSelecto
     }
     $btn.prop('disabled', false).text('查詢熱量');
 }
-=======
+
 function toggleSidebar() {
     const sidebar = document.querySelector(".sidebar");
     sidebar.classList.toggle("active");
@@ -108,4 +108,4 @@ window.queryCalorieByGPT = async function(food, qty, btnSelector, calorieSelecto
     }
     $btn.prop('disabled', false).text('查詢熱量');
 }
->>>>>>> d003dfb0b3afc9919a40a75d74a4514667ba0d9a
+
