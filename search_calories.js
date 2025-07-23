@@ -22,7 +22,7 @@ window.queryCalorieByGPT = async function(food, qty, btnSelector, calorieSelecto
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer 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'
+                'Authorization': 'Bearer {API_KEY}'
                 
             },
             body: JSON.stringify({
