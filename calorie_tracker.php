@@ -23,6 +23,7 @@ $total_cal = 0;
 foreach ($records as $r) {
     $total_cal += $r['calorie'];
 }
+
 $goal_cal = $goal ? $goal['calorie_goal'] : 0;
 $progress = $goal_cal ? min(100, round($total_cal / $goal_cal * 100)) : 0;
 $over = $goal_cal && $total_cal > $goal_cal;
@@ -109,6 +110,10 @@ if ($progress <= 50) {
                         <th>食物名稱</th>
                         <th>數量</th>
                         <th>熱量 (kcal)</th>
+                        <th>蛋白質 (g)</th>
+                        <th>脂肪 (g)</th>
+                        <th>碳水 (g)</th>
+                        <th>纖維 (g)</th>
                         <th>時間</th>
                         <th>操作</th>
                     </tr>
@@ -119,6 +124,10 @@ if ($progress <= 50) {
                         <td><?= htmlspecialchars($r['food_name']) ?></td>
                         <td><?= isset($r['quantity']) ? $r['quantity'] : 1 ?></td>
                         <td><?= $r['calorie'] ?></td>
+                        <td><?= isset($r['protein']) ? number_format($r['protein'], 1) : '-' ?></td>
+                        <td><?= isset($r['fat']) ? number_format($r['fat'], 1) : '-' ?></td>
+                        <td><?= isset($r['carb']) ? number_format($r['carb'], 1) : '-' ?></td>
+                        <td><?= isset($r['fiber']) ? number_format($r['fiber'], 1) : '-' ?></td>
                         <td><?= date('H:i', strtotime($r['created_at'])) ?></td>
                         <td>
                             <button class="btn btn-sm btn-outline-danger delete-btn" data-id="<?= $r['id'] ?>">刪除</button>
@@ -236,8 +245,37 @@ $('#quantity').on('input change', function() {
 $('#foodForm').on('submit', function(e) {
     e.preventDefault();
     $('#calorie').prop('readonly', false);
-    $.post('add_calorie_record.php', $(this).serialize(), function() {
-        location.reload();
+    
+    var foodName = $('#foodName').val().trim();
+    var quantity = $('#quantity').val();
+    var calorie = $('#calorie').val();
+    
+    // 先查詢營養素
+    $.get('nutrition_analysis_api.php', { food: foodName, quantity: quantity }, function(data) {
+        if (data.success && data.nutrition) {
+            // 將營養素資料加入表單
+            var formData = $('#foodForm').serialize();
+            formData += '&protein=' + (data.nutrition.protein || 0);
+            formData += '&fat=' + (data.nutrition.fat || 0);
+            formData += '&carb=' + (data.nutrition.carb || 0);
+            formData += '&fiber=' + (data.nutrition.fiber || 0);
+            formData += '&vitamin=' + encodeURIComponent(data.nutrition.vitamin || '');
+            formData += '&mineral=' + encodeURIComponent(data.nutrition.mineral || '');
+            
+            $.post('add_calorie_record.php', formData, function() {
+                location.reload();
+            });
+        } else {
+            // 如果營養素查詢失敗，仍然新增紀錄（只有熱量）
+            $.post('add_calorie_record.php', $('#foodForm').serialize(), function() {
+                location.reload();
+            });
+        }
+    }).fail(function() {
+        // API 呼叫失敗時，仍然新增紀錄
+        $.post('add_calorie_record.php', $('#foodForm').serialize(), function() {
+            location.reload();
+        });
     });
 });
 // 刪除紀錄
@@ -275,6 +313,8 @@ $('#queryCalorieBtn').on('click', function() {
     var qty = $('#quantity').val().trim();
     queryCalorieByGPT(food, qty, '#queryCalorieBtn', '#calorie', '#foodSearchHint');
 });
+
+
 </script>
 </body>
 </html> 

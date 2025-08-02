@@ -108,4 +108,3 @@ window.queryCalorieByGPT = async function(food, qty, btnSelector, calorieSelecto
     }
     $btn.prop('disabled', false).text('查詢熱量');
 }
-
