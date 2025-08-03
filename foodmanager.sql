@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 127.0.0.1
--- 生成日期： 2025-07-13 13:48:24
+-- 生成日期： 2025-08-03 16:52:37
 -- 服务器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -28,8 +28,8 @@ USE `foodmanager`;
 --
 -- 表的结构 `calorie_records`
 --
--- 创建时间： 2025-07-13 11:04:51
--- 最后更新： 2025-07-13 11:45:40
+-- 创建时间： 2025-08-02 05:53:20
+-- 最后更新： 2025-08-03 14:47:55
 --
 
 DROP TABLE IF EXISTS `calorie_records`;
@@ -38,9 +38,16 @@ CREATE TABLE `calorie_records` (
   `user_id` int(11) NOT NULL,
   `record_date` date NOT NULL,
   `food_name` varchar(255) NOT NULL,
+  `quantity` int(11) NOT NULL DEFAULT 1,
   `calorie` float NOT NULL,
   `source` enum('nutrition_facts','openai','manual') NOT NULL,
-  `created_at` datetime DEFAULT current_timestamp()
+  `created_at` datetime DEFAULT current_timestamp(),
+  `protein` float DEFAULT 0,
+  `fat` float DEFAULT 0,
+  `carb` float DEFAULT 0,
+  `fiber` float DEFAULT 0,
+  `vitamin` text DEFAULT NULL,
+  `mineral` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -48,12 +55,25 @@ CREATE TABLE `calorie_records` (
 --
 
 TRUNCATE TABLE `calorie_records`;
+--
+-- 转存表中的数据 `calorie_records`
+--
+
+INSERT INTO `calorie_records` (`id`, `user_id`, `record_date`, `food_name`, `quantity`, `calorie`, `source`, `created_at`, `protein`, `fat`, `carb`, `fiber`, `vitamin`, `mineral`) VALUES
+(74, 1, '2025-07-21', '黑森林蛋糕', 2, 553.4, 'manual', '2025-07-21 23:10:14', 0, 0, 0, 0, NULL, NULL),
+(84, 1, '2025-08-02', '清燉牛肉麵', 1, 430, 'manual', '2025-08-02 15:15:35', 30, 15, 50, 4, '維生素B群、維生素A', '鐵、鋅、鈉'),
+(85, 1, '2025-08-03', '清燉牛肉麵', 1, 430, 'manual', '2025-08-03 17:49:34', 30, 15, 60, 4, '維生素B群、維生素A', '鐵、鈣、鋅'),
+(86, 1, '2025-08-03', '黑森林蛋糕', 2, 553.4, 'manual', '2025-08-03 17:49:48', 8, 30, 70, 4, '維生素A、維生素B群', '鈣、鐵、鎂'),
+(87, 1, '2025-08-03', '起司蛋餅', 1, 270, 'manual', '2025-08-03 17:50:15', 12, 15, 30, 2, '維生素A、維生素B群', '鈣、磷、鈉'),
+(88, 1, '2025-08-03', '冰紅茶', 1, 27.5, 'manual', '2025-08-03 17:50:26', 0, 0, 22, 0, '維生素C', '鉀'),
+(91, 1, '2025-08-03', '烤雞胸肉配藜麥和綜合蔬菜', 1, 750, 'manual', '2025-08-03 22:45:21', 40, 6, 35, 8, '維生素A、維生素C、維生素B群', '鉀、鎂、鐵');
+
 -- --------------------------------------------------------
 
 --
 -- 表的结构 `family`
 --
--- 创建时间： 2025-07-13 10:00:51
+-- 创建时间： 2025-07-13 15:11:07
 --
 
 DROP TABLE IF EXISTS `family`;
@@ -74,7 +94,7 @@ TRUNCATE TABLE `family`;
 --
 -- 表的结构 `family_member`
 --
--- 创建时间： 2025-07-13 10:00:51
+-- 创建时间： 2025-07-13 15:11:07
 --
 
 DROP TABLE IF EXISTS `family_member`;
@@ -95,7 +115,7 @@ TRUNCATE TABLE `family_member`;
 --
 -- 表的结构 `family_roles`
 --
--- 创建时间： 2025-07-13 10:00:48
+-- 创建时间： 2025-07-13 15:11:04
 --
 
 DROP TABLE IF EXISTS `family_roles`;
@@ -130,7 +150,7 @@ INSERT INTO `family_roles` (`id`, `role_name`) VALUES
 --
 -- 表的结构 `ingredient`
 --
--- 创建时间： 2025-07-13 10:00:51
+-- 创建时间： 2025-07-13 15:11:07
 --
 
 DROP TABLE IF EXISTS `ingredient`;
@@ -186,7 +206,7 @@ INSERT INTO `ingredient` (`IngredientId`, `uId`, `IName`, `Quantity`, `ExpireDat
 --
 -- 表的结构 `ingredientusage`
 --
--- 创建时间： 2025-07-13 10:00:51
+-- 创建时间： 2025-07-13 15:11:07
 --
 
 DROP TABLE IF EXISTS `ingredientusage`;
@@ -222,7 +242,7 @@ INSERT INTO `ingredientusage` (`UsageId`, `IngredientId`, `uId`, `UsedQuantity`,
 --
 -- 表的结构 `notifications`
 --
--- 创建时间： 2025-07-13 10:00:52
+-- 创建时间： 2025-07-13 15:11:08
 --
 
 DROP TABLE IF EXISTS `notifications`;
@@ -260,7 +280,7 @@ INSERT INTO `notifications` (`id`, `user_id`, `type`, `content`, `item_id`, `ite
 --
 -- 表的结构 `nutrition_facts`
 --
--- 创建时间： 2025-07-13 10:00:49
+-- 创建时间： 2025-07-13 15:11:04
 --
 
 DROP TABLE IF EXISTS `nutrition_facts`;
@@ -2481,8 +2501,7 @@ INSERT INTO `nutrition_facts` (`id`, `food_category`, `sample_name`, `content_de
 --
 -- 表的结构 `recipe`
 --
--- 创建时间： 2025-07-13 10:00:52
--- 最后更新： 2025-07-13 11:33:25
+-- 创建时间： 2025-07-13 15:11:08
 --
 
 DROP TABLE IF EXISTS `recipe`;
@@ -2528,7 +2547,7 @@ INSERT INTO `recipe` (`RecipeId`, `rName`, `cooktime`, `DifficultyLevel`, `Descr
 --
 -- 表的结构 `recipeingredient`
 --
--- 创建时间： 2025-07-13 10:00:52
+-- 创建时间： 2025-07-13 15:11:08
 --
 
 DROP TABLE IF EXISTS `recipeingredient`;
@@ -2660,7 +2679,7 @@ INSERT INTO `recipeingredient` (`RecipeId`, `IngredientName`, `Quantity`, `Unit`
 --
 -- 表的结构 `recipesteps`
 --
--- 创建时间： 2025-07-13 10:00:52
+-- 创建时间： 2025-07-13 15:11:08
 --
 
 DROP TABLE IF EXISTS `recipesteps`;
@@ -2759,7 +2778,7 @@ INSERT INTO `recipesteps` (`RecipeId`, `StepOrder`, `StepDescription`, `StepImag
 --
 -- 表的结构 `recipetags`
 --
--- 创建时间： 2025-07-13 10:00:53
+-- 创建时间： 2025-07-13 15:11:09
 --
 
 DROP TABLE IF EXISTS `recipetags`;
@@ -2789,7 +2808,7 @@ INSERT INTO `recipetags` (`id`, `RecipeId`, `Tag`) VALUES
 --
 -- 表的结构 `recipe_favorites`
 --
--- 创建时间： 2025-07-13 10:00:53
+-- 创建时间： 2025-07-13 15:11:09
 --
 
 DROP TABLE IF EXISTS `recipe_favorites`;
@@ -2810,7 +2829,7 @@ TRUNCATE TABLE `recipe_favorites`;
 --
 -- 表的结构 `recipe_likes`
 --
--- 创建时间： 2025-07-13 10:00:53
+-- 创建时间： 2025-07-13 15:11:09
 --
 
 DROP TABLE IF EXISTS `recipe_likes`;
@@ -2839,7 +2858,7 @@ INSERT INTO `recipe_likes` (`LikeId`, `RecipeId`, `UserId`, `LikedAt`) VALUES
 --
 -- 表的结构 `reviews`
 --
--- 创建时间： 2025-07-13 10:00:53
+-- 创建时间： 2025-07-13 15:11:09
 --
 
 DROP TABLE IF EXISTS `reviews`;
@@ -2862,7 +2881,7 @@ TRUNCATE TABLE `reviews`;
 --
 -- 表的结构 `shoppingitem`
 --
--- 创建时间： 2025-07-13 10:00:53
+-- 创建时间： 2025-07-13 15:11:09
 --
 
 DROP TABLE IF EXISTS `shoppingitem`;
@@ -2902,7 +2921,7 @@ INSERT INTO `shoppingitem` (`ItemId`, `ShoppingId`, `Quantity`, `Price`, `Unit`,
 --
 -- 表的结构 `shoppinglist`
 --
--- 创建时间： 2025-07-13 10:00:53
+-- 创建时间： 2025-07-13 15:11:09
 --
 
 DROP TABLE IF EXISTS `shoppinglist`;
@@ -2932,7 +2951,7 @@ INSERT INTO `shoppinglist` (`ShoppingId`, `uId`, `CreateDate`, `IsCompleted`, `L
 --
 -- 表的结构 `user`
 --
--- 创建时间： 2025-07-13 10:00:50
+-- 创建时间： 2025-07-13 15:11:06
 --
 
 DROP TABLE IF EXISTS `user`;
@@ -2966,7 +2985,8 @@ INSERT INTO `user` (`uId`, `uName`, `Password`, `Email`, `Language`, `uImage`) V
 --
 -- 表的结构 `user_calorie_goal`
 --
--- 创建时间： 2025-07-13 11:04:51
+-- 创建时间： 2025-07-13 15:11:10
+-- 最后更新： 2025-08-03 12:32:44
 --
 
 DROP TABLE IF EXISTS `user_calorie_goal`;
@@ -2986,12 +3006,62 @@ CREATE TABLE `user_calorie_goal` (
 --
 
 TRUNCATE TABLE `user_calorie_goal`;
+--
+-- 转存表中的数据 `user_calorie_goal`
+--
+
+INSERT INTO `user_calorie_goal` (`id`, `user_id`, `calorie_goal`, `gender`, `age`, `height`, `weight`, `updated_at`) VALUES
+(1, 1, 2575, 'male', 25, 175, 78, '2025-07-14 22:47:15'),
+(2, 1, 2614, 'male', 25, 175, 80, '2025-08-02 14:10:08'),
+(3, 1, 2575, 'male', 25, 175, 78, '2025-08-02 14:10:23'),
+(4, 1, 2575, 'male', 25, 175, 78, '2025-08-02 14:12:25'),
+(5, 1, 2575, 'male', 25, 175, 78, '2025-08-03 18:00:48'),
+(6, 1, 2575, 'male', 25, 175, 78, '2025-08-03 20:28:40'),
+(7, 1, 2575, 'male', 25, 175, 78, '2025-08-03 20:29:09'),
+(8, 1, 2575, 'male', 25, 175, 78, '2025-08-03 20:32:10'),
+(9, 1, 2575, 'male', 25, 175, 78, '2025-08-03 20:32:27'),
+(10, 1, 2575, 'male', 25, 175, 78, '2025-08-03 20:32:37'),
+(11, 1, 2575, 'male', 25, 175, 78, '2025-08-03 20:32:44');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `user_nutrition_goal`
+--
+-- 创建时间： 2025-08-03 10:26:21
+-- 最后更新： 2025-08-03 12:32:44
+--
+
+DROP TABLE IF EXISTS `user_nutrition_goal`;
+CREATE TABLE `user_nutrition_goal` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `protein_goal` float DEFAULT 0,
+  `fat_goal` float DEFAULT 0,
+  `carb_goal` float DEFAULT 0,
+  `fiber_goal` float DEFAULT 0,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- 插入之前先把表清空（truncate） `user_nutrition_goal`
+--
+
+TRUNCATE TABLE `user_nutrition_goal`;
+--
+-- 转存表中的数据 `user_nutrition_goal`
+--
+
+INSERT INTO `user_nutrition_goal` (`id`, `user_id`, `protein_goal`, `fat_goal`, `carb_goal`, `fiber_goal`, `created_at`, `updated_at`) VALUES
+(1, 1, 120.6, 80.4, 301.4, 33.8, '2025-08-03 12:28:40', '2025-08-03 12:32:44');
+
 -- --------------------------------------------------------
 
 --
 -- 表的结构 `user_roles`
 --
--- 创建时间： 2025-07-13 10:00:54
+-- 创建时间： 2025-07-13 15:11:10
 --
 
 DROP TABLE IF EXISTS `user_roles`;
@@ -3156,6 +3226,13 @@ ALTER TABLE `user_calorie_goal`
   ADD KEY `user_id` (`user_id`);
 
 --
+-- 表的索引 `user_nutrition_goal`
+--
+ALTER TABLE `user_nutrition_goal`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
 -- 表的索引 `user_roles`
 --
 ALTER TABLE `user_roles`
@@ -3170,7 +3247,7 @@ ALTER TABLE `user_roles`
 -- 使用表AUTO_INCREMENT `calorie_records`
 --
 ALTER TABLE `calorie_records`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 
 --
 -- 使用表AUTO_INCREMENT `family`
@@ -3266,7 +3343,13 @@ ALTER TABLE `user`
 -- 使用表AUTO_INCREMENT `user_calorie_goal`
 --
 ALTER TABLE `user_calorie_goal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- 使用表AUTO_INCREMENT `user_nutrition_goal`
+--
+ALTER TABLE `user_nutrition_goal`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- 使用表AUTO_INCREMENT `user_roles`
@@ -3379,6 +3462,12 @@ ALTER TABLE `shoppinglist`
 --
 ALTER TABLE `user_calorie_goal`
   ADD CONSTRAINT `user_calorie_goal_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`uId`) ON DELETE CASCADE;
+
+--
+-- 限制表 `user_nutrition_goal`
+--
+ALTER TABLE `user_nutrition_goal`
+  ADD CONSTRAINT `user_nutrition_goal_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`uId`) ON DELETE CASCADE;
 
 --
 -- 限制表 `user_roles`
