@@ -281,7 +281,7 @@ display_form:
                                 </div>
                                 <div class="col-md-3 mb-2">
                                     <label class="form-label">數量</label>
-                                    <input type="text" class="form-control border-secondary" name="ingredients[quantity][]" placeholder="例如：2">
+                                    <input type="number" class="form-control border-secondary" name="ingredients[quantity][]" min="0" placeholder="例如：2">
                                 </div>
                                 <div class="col-md-2 mb-2">
                                     <label class="form-label">單位</label>
@@ -325,7 +325,16 @@ display_form:
                     </div>
                 </div>
 
+                <!-- 驗證結果顯示區 -->
+                <div id="validation-results" class="mb-4" style="display: none;">
+                    <h5>AI 驗證結果</h5>
+                    <div id="validation-content" class="border rounded p-3 bg-light">
+                        <!-- 驗證結果將在這裡顯示 -->
+                    </div>
+                </div>
+
                 <div class="d-flex gap-2">
+                    <button type="button" id="validate-recipe" class="btn btn-warning">AI 驗證食譜</button>
                     <button type="submit" name="add_recipe" class="btn btn-primary">提交食譜</button>
                     <a href="recipe.php" class="btn btn-secondary">取消</a>
                 </div>
@@ -454,10 +463,173 @@ display_form:
             updateStepButtons();
         }
 
+        // 食譜驗證功能
+        async function validateRecipe() {
+            const validateBtn = document.getElementById('validate-recipe');
+            const originalText = validateBtn.textContent;
+            
+            // 顯示載入狀態
+            validateBtn.textContent = '驗證中...';
+            validateBtn.disabled = true;
+            
+            try {
+                // 收集表單資料
+                const formData = collectFormData();
+                
+                // 發送驗證請求
+                const response = await fetch('recipe_validation_api.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    displayValidationResults(result.validation_result);
+                } else {
+                    showValidationError(result.error || '驗證失敗');
+                }
+                
+            } catch (error) {
+                console.error('驗證錯誤:', error);
+                showValidationError('驗證過程中發生錯誤，請重試');
+            } finally {
+                // 恢復按鈕狀態
+                validateBtn.textContent = originalText;
+                validateBtn.disabled = false;
+            }
+        }
+        
+        // 收集表單資料
+        function collectFormData() {
+            const recipeName = document.getElementById('rName').value;
+            const cookTime = document.getElementById('cooktime').value;
+            const difficulty = document.getElementById('difficultyLevel').value;
+            const description = document.getElementById('description').value;
+            
+            // 收集食材資料
+            const ingredients = [];
+            document.querySelectorAll('input[name="ingredients[name][]"]').forEach((input, index) => {
+                const name = input.value.trim();
+                const quantity = document.querySelectorAll('input[name="ingredients[quantity][]"]')[index]?.value.trim() || '';
+                const unit = document.querySelectorAll('select[name="ingredients[unit][]"]')[index]?.value || '';
+                
+                if (name) {
+                    ingredients.push(`${name} ${quantity} ${unit}`.trim());
+                }
+            });
+            
+            // 收集步驟資料
+            const steps = [];
+            document.querySelectorAll('textarea[name="steps[description][]"]').forEach((textarea, index) => {
+                const step = textarea.value.trim();
+                if (step) {
+                    steps.push(`步驟${index + 1}: ${step}`);
+                }
+            });
+            
+            return {
+                recipe_name: recipeName,
+                cook_time: cookTime || 0,
+                difficulty: difficulty || '未指定',
+                description: description || '',
+                ingredients: ingredients.join(', '),
+                steps: steps.join('\n')
+            };
+        }
+        
+        // 顯示驗證結果
+        function displayValidationResults(validation) {
+            const resultsDiv = document.getElementById('validation-results');
+            const contentDiv = document.getElementById('validation-content');
+            
+            let html = `
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <h3 class="text-${getScoreColor(validation.score)}">${validation.score}/10</h3>
+                            <small class="text-muted">合理性評分</small>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="mb-3">
+                            <h6 class="text-danger">發現的問題：</h6>
+                            <ul class="mb-0">
+                                ${(validation.issues || []).map(issue => `<li>${issue}</li>`).join('')}
+                            </ul>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <h6 class="text-primary">修正建議：</h6>
+                            <ul class="mb-0">
+                                ${(validation.suggestions || []).map(suggestion => `<li>${suggestion}</li>`).join('')}
+                            </ul>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6 class="text-info">烹煮時間建議：</h6>
+                                <p class="mb-2">${validation.cook_time_suggestion || '無特殊建議'}</p>
+                                
+                                <h6 class="text-info">難度等級建議：</h6>
+                                <p class="mb-2">${validation.difficulty_suggestion || '無特殊建議'}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="text-info">食材搭配建議：</h6>
+                                <ul class="mb-2">
+                                    ${(validation.ingredient_suggestions || []).map(suggestion => `<li>${suggestion}</li>`).join('')}
+                                </ul>
+                                
+                                <h6 class="text-info">步驟優化建議：</h6>
+                                <ul class="mb-0">
+                                    ${(validation.step_suggestions || []).map(suggestion => `<li>${suggestion}</li>`).join('')}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            contentDiv.innerHTML = html;
+            resultsDiv.style.display = 'block';
+            
+            // 滾動到驗證結果
+            resultsDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // 根據評分獲取顏色
+        function getScoreColor(score) {
+            if (score >= 8) return 'success';
+            if (score >= 6) return 'warning';
+            return 'danger';
+        }
+        
+        // 顯示驗證錯誤
+        function showValidationError(message) {
+            const resultsDiv = document.getElementById('validation-results');
+            const contentDiv = document.getElementById('validation-content');
+            
+            contentDiv.innerHTML = `
+                <div class="alert alert-danger">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    ${message}
+                </div>
+            `;
+            
+            resultsDiv.style.display = 'block';
+            resultsDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+        
         // 初始化
         document.addEventListener("DOMContentLoaded", function() {
             updateStepButtons();
             updateIngredientButtons();
+            
+            // 綁定驗證按鈕事件
+            document.getElementById('validate-recipe').addEventListener('click', validateRecipe);
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>

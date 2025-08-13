@@ -144,7 +144,7 @@ if ($result && $result->num_rows > 0) {
                         <i class="bi bi-search"></i>
                     </button>
                 </form>
-                <a href="add_recipe.php" class="btn custom-btn-upload">
+                <a href="add_recipe.php" class="btn custom-btn-upload mb-3">
                     <i class="bi bi-plus-circle me-2"></i>上傳食譜
                 </a>
             </div>
