@@ -1,8 +1,8 @@
 <?php
+require_once 'config.php';
 header('Content-Type: application/json');
 
-// 從 search_calories.js 取得相同的 API KEY
-$api_key = '{API_KEY}';
+$api_key = OPENAI_API_KEY;
 
 $food = $_GET['food'] ?? '';
 $quantity = $_GET['quantity'] ?? 1;
@@ -31,7 +31,7 @@ $prompt = "請分析 {$quantity} 份 {$food} 的營養成分，請以JSON格式�
 }";
 
 try {
-    $response = file_get_contents('https://api.openai.com/v1/chat/completions', false, stream_context_create([
+    $response = file_get_contents(OPENAI_API_URL, false, stream_context_create([
         'http' => [
             'method' => 'POST',
             'header' => [
@@ -39,12 +39,12 @@ try {
                 'Authorization: Bearer ' . $api_key
             ],
             'content' => json_encode([
-                'model' => 'gpt-4o',
+                'model' => OPENAI_MODEL,
                 'messages' => [
                     ['role' => 'user', 'content' => $prompt]
                 ],
-                'max_tokens' => 200,
-                'temperature' => 0.2
+                'max_tokens' => OPENAI_MAX_TOKENS,
+                'temperature' => OPENAI_TEMPERATURE
             ])
         ]
     ]));

@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once 'db.php';
+require_once 'config.php';
 
 if (!isset($_SESSION['uId'])) {
     http_response_code(401);
@@ -140,10 +141,10 @@ if ($isRetry) {
 }
 
 // 呼叫 OpenAI API
-$apiKey = '{API_KEY}';
+$apiKey = OPENAI_API_KEY;
 
 $ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, 'https://api.openai.com/v1/chat/completions');
+curl_setopt($ch, CURLOPT_URL, OPENAI_API_URL);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
@@ -151,11 +152,11 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, [
     'Authorization: Bearer ' . $apiKey
 ]);
 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode([
-    'model' => 'gpt-4o',
+    'model' => OPENAI_MODEL,
     'messages' => [
         ['role' => 'user', 'content' => $prompt]
     ],
-    'max_tokens' => 500,
+    'max_tokens' => OPENAI_MAX_TOKENS,
     'temperature' => $isRetry ? 0.9 : 0.7
 ]));
 
