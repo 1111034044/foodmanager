@@ -22,4 +22,4 @@ $today = date('Y-m-d');
 $stmt = $db->prepare("INSERT INTO calorie_records (user_id, record_date, food_name, quantity, calorie, protein, fat, carb, fiber, vitamin, mineral, source, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())");
 $stmt->execute([$uId, $today, $food, $quantity, $cal, $protein, $fat, $carb, $fiber, $vitamin, $mineral, $source]);
 echo 'ok';
-?> 
+?>

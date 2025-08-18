@@ -255,7 +255,17 @@ $conn->close();
     <?php include 'sidebar.php'; ?>
 
     <div class="container mt-4">
-        <h2>食材管理</h2>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h1>食材管理</h1>
+            <div>
+                <a href="expiring_food_recommend.php" class="btn btn-warning me-2">
+                    <i class="bi bi-lightbulb"></i> 過期食材推薦餐點
+                </a>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addIngredientModal">
+                    <i class="bi bi-plus-circle"></i> 添加食材
+                </button>
+            </div>
+        </div>
         <div class="list-group mb-3">
             <!-- 新增表單標題列 -->
             <div class="list-group-item bg-light">
