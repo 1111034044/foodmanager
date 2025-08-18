@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- 主机： 127.0.0.1
--- 生成日期： 2025-08-03 16:52:37
--- 服务器版本： 10.4.32-MariaDB
--- PHP 版本： 8.2.12
+-- 主機： 127.0.0.1
+-- 產生時間： 2025-08-18 13:37:57
+-- 伺服器版本： 10.4.32-MariaDB
+-- PHP 版本： 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- 数据库： `foodmanager`
+-- 資料庫： `foodmanager`
 --
 CREATE DATABASE IF NOT EXISTS `foodmanager` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `foodmanager`;
@@ -26,10 +26,10 @@ USE `foodmanager`;
 -- --------------------------------------------------------
 
 --
--- 表的结构 `calorie_records`
+-- 資料表結構 `calorie_records`
 --
--- 创建时间： 2025-08-02 05:53:20
--- 最后更新： 2025-08-03 14:47:55
+-- 建立時間： 2025-08-17 18:29:41
+-- 最後更新： 2025-08-18 11:16:49
 --
 
 DROP TABLE IF EXISTS `calorie_records`;
@@ -51,12 +51,12 @@ CREATE TABLE `calorie_records` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 插入之前先把表清空（truncate） `calorie_records`
+-- 資料表新增資料前，先清除舊資料 `calorie_records`
 --
 
 TRUNCATE TABLE `calorie_records`;
 --
--- 转存表中的数据 `calorie_records`
+-- 傾印資料表的資料 `calorie_records`
 --
 
 INSERT INTO `calorie_records` (`id`, `user_id`, `record_date`, `food_name`, `quantity`, `calorie`, `source`, `created_at`, `protein`, `fat`, `carb`, `fiber`, `vitamin`, `mineral`) VALUES
@@ -66,14 +66,32 @@ INSERT INTO `calorie_records` (`id`, `user_id`, `record_date`, `food_name`, `qua
 (86, 1, '2025-08-03', '黑森林蛋糕', 2, 553.4, 'manual', '2025-08-03 17:49:48', 8, 30, 70, 4, '維生素A、維生素B群', '鈣、鐵、鎂'),
 (87, 1, '2025-08-03', '起司蛋餅', 1, 270, 'manual', '2025-08-03 17:50:15', 12, 15, 30, 2, '維生素A、維生素B群', '鈣、磷、鈉'),
 (88, 1, '2025-08-03', '冰紅茶', 1, 27.5, 'manual', '2025-08-03 17:50:26', 0, 0, 22, 0, '維生素C', '鉀'),
-(91, 1, '2025-08-03', '烤雞胸肉配藜麥和綜合蔬菜', 1, 750, 'manual', '2025-08-03 22:45:21', 40, 6, 35, 8, '維生素A、維生素C、維生素B群', '鉀、鎂、鐵');
+(91, 1, '2025-08-03', '烤雞胸肉配藜麥和綜合蔬菜', 1, 750, 'manual', '2025-08-03 22:45:21', 40, 6, 35, 8, '維生素A、維生素C、維生素B群', '鉀、鎂、鐵'),
+(94, 6, '2025-08-17', '乳酪蛋糕', 3, 887.1, 'manual', '2025-08-18 02:32:04', 0, 0, 0, 0, '', ''),
+(95, 6, '2025-08-17', '去皮清肉(肉雞)', 3, 350.3, 'manual', '2025-08-18 02:32:34', 0, 0, 0, 0, '', ''),
+(96, 6, '2025-08-18', '高麗菜炒蛋', 1, 250, 'manual', '2025-08-18 16:41:46', 12, 18, 10, 4, '', ''),
+(97, 6, '2025-08-18', '燕麥香蕉奶昔', 1, 550, 'manual', '2025-08-18 16:42:20', 6, 4.5, 45, 5, '維生素B6、維生素C', '鉀、鎂、鈣'),
+(98, 6, '2025-08-18', '高麗菜炒蛋', 1, 250, 'manual', '2025-08-18 17:22:16', 15, 18, 10, 5, '', ''),
+(99, 6, '2025-08-18', '夏威夷風椰香高麗菜沙拉', 1, 350, 'manual', '2025-08-18 17:33:07', 8, 25, 30, 7, '', ''),
+(101, 6, '2025-08-18', '奶香雞肉燉飯', 1, 750, 'manual', '2025-08-18 17:34:54', 75, 20, 100, 5, '', ''),
+(102, 6, '2025-08-18', '雞肉炒飯', 1, 450, 'manual', '2025-08-18 17:43:38', 30, 10, 60, 5, '', ''),
+(103, 6, '2025-08-18', '香蕉燕麥牛奶奶昔', 1, 350, 'manual', '2025-08-18 17:44:07', 10, 5, 65, 5, '', ''),
+(104, 6, '2025-08-18', '清新水果沙拉', 1, 250, 'manual', '2025-08-18 17:56:10', 2, 1, 60, 7, '', ''),
+(105, 6, '2025-08-18', '口香糖甜點拼盤', 1, 20, 'manual', '2025-08-18 17:56:57', 0, 0, 5, 0, '', ''),
+(108, 6, '2025-08-18', '口香糖薄荷茶', 1, 5, 'manual', '2025-08-18 18:02:20', 0, 0, 1, 0, '', ''),
+(109, 6, '2025-08-18', '太妃糖香蕉奶昔', 1, 250, 'manual', '2025-08-18 18:04:02', 5, 7, 45, 3, '', ''),
+(110, 6, '2025-08-18', '可樂冰沙', 1, 150, 'manual', '2025-08-18 18:07:38', 0, 0, 39, 0, '', ''),
+(111, 6, '2025-08-18', '榴槤冰沙', 1, 220, 'manual', '2025-08-18 18:09:46', 4, 8, 35, 2, '', ''),
+(112, 6, '2025-08-18', '香煎雞腿佐香料', 1, 600, 'manual', '2025-08-18 18:10:30', 80, 30, 0, 0, '', ''),
+(114, 6, '2025-08-18', '火腿腸冷拌沙拉', 1, 300, 'manual', '2025-08-18 18:16:19', 15, 20, 10, 5, '', ''),
+(115, 6, '2025-08-18', '金莎巧克力冰淇淋杯', 1, 350, 'manual', '2025-08-18 19:16:49', 5, 22, 35, 2, '', '');
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `family`
+-- 資料表結構 `family`
 --
--- 创建时间： 2025-07-13 15:11:07
+-- 建立時間： 2025-08-17 18:29:41
 --
 
 DROP TABLE IF EXISTS `family`;
@@ -85,16 +103,16 @@ CREATE TABLE `family` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 插入之前先把表清空（truncate） `family`
+-- 資料表新增資料前，先清除舊資料 `family`
 --
 
 TRUNCATE TABLE `family`;
 -- --------------------------------------------------------
 
 --
--- 表的结构 `family_member`
+-- 資料表結構 `family_member`
 --
--- 创建时间： 2025-07-13 15:11:07
+-- 建立時間： 2025-08-17 18:29:41
 --
 
 DROP TABLE IF EXISTS `family_member`;
@@ -106,16 +124,16 @@ CREATE TABLE `family_member` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 插入之前先把表清空（truncate） `family_member`
+-- 資料表新增資料前，先清除舊資料 `family_member`
 --
 
 TRUNCATE TABLE `family_member`;
 -- --------------------------------------------------------
 
 --
--- 表的结构 `family_roles`
+-- 資料表結構 `family_roles`
 --
--- 创建时间： 2025-07-13 15:11:04
+-- 建立時間： 2025-08-17 18:29:41
 --
 
 DROP TABLE IF EXISTS `family_roles`;
@@ -125,12 +143,12 @@ CREATE TABLE `family_roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 插入之前先把表清空（truncate） `family_roles`
+-- 資料表新增資料前，先清除舊資料 `family_roles`
 --
 
 TRUNCATE TABLE `family_roles`;
 --
--- 转存表中的数据 `family_roles`
+-- 傾印資料表的資料 `family_roles`
 --
 
 INSERT INTO `family_roles` (`id`, `role_name`) VALUES
@@ -148,9 +166,10 @@ INSERT INTO `family_roles` (`id`, `role_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- 表的结构 `ingredient`
+-- 資料表結構 `ingredient`
 --
--- 创建时间： 2025-07-13 15:11:07
+-- 建立時間： 2025-08-17 18:29:41
+-- 最後更新： 2025-08-18 11:16:49
 --
 
 DROP TABLE IF EXISTS `ingredient`;
@@ -168,12 +187,12 @@ CREATE TABLE `ingredient` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 插入之前先把表清空（truncate） `ingredient`
+-- 資料表新增資料前，先清除舊資料 `ingredient`
 --
 
 TRUNCATE TABLE `ingredient`;
 --
--- 转存表中的数据 `ingredient`
+-- 傾印資料表的資料 `ingredient`
 --
 
 INSERT INTO `ingredient` (`IngredientId`, `uId`, `IName`, `Quantity`, `ExpireDate`, `StoreType`, `Unit`, `PurchaseDate`, `ConsumedDate`, `Role`) VALUES
@@ -188,25 +207,44 @@ INSERT INTO `ingredient` (`IngredientId`, `uId`, `IName`, `Quantity`, `ExpireDat
 (19, 1, '蛋', 5, '2025-06-05', '常溫', '顆', '2025-05-28', NULL, NULL),
 (20, 1, '高麗菜', 2, '2025-07-10', '冷藏', '個', '2025-07-02', NULL, '媽媽'),
 (21, 1, '水餃', 10, '2025-07-06', '冷藏', '個', '2025-07-03', NULL, '弟弟'),
-(22, 6, '水餃', 7, '2025-07-06', '冷藏', '個', '2025-07-03', NULL, '未指定'),
-(23, 6, '12', 1, '2025-07-22', '冷凍', '克', '2025-07-03', NULL, '未指定'),
-(24, 6, '2145', 4, '2025-07-06', '冷藏', '包', '2025-07-03', NULL, '未指定'),
-(25, 6, '42401', 4, '2025-07-09', '冷凍', '毫升', '2025-07-03', NULL, '未指定'),
-(26, 6, '542414245', 4, '2025-07-15', '冷凍', '公斤', '2025-07-03', NULL, '未指定'),
-(27, 6, '54254', 4, '2025-07-22', '冷藏', '毫升', '2025-07-03', NULL, '未指定'),
-(28, 6, '524156', 1, '2025-07-28', '冷凍', '毫升', '2025-07-03', NULL, '未指定'),
-(29, 6, 'zxczx', 54, '2025-07-14', '冷凍', '克', '2025-07-03', NULL, '弟弟'),
-(30, 6, '7448', 8, '2025-07-15', '冷凍', '包', '2025-07-03', NULL, '弟弟'),
-(31, 6, '875875', 6, '2025-07-23', '常溫', '克', '2025-07-03', NULL, '弟弟'),
-(32, 6, '45784', 5, '2025-07-08', NULL, '克', '2025-07-03', NULL, '弟弟'),
-(33, 6, '23', NULL, NULL, NULL, '', '2025-07-03', NULL, '弟弟');
+(22, 6, '水餃', 0, '2025-07-06', '冷藏', '個', '2025-07-03', NULL, '未指定'),
+(23, 6, '12', 0, '2025-07-22', '冷凍', '克', '2025-07-03', NULL, '未指定'),
+(24, 6, '2145', 0, '2025-07-06', '冷藏', '包', '2025-07-03', NULL, '未指定'),
+(25, 6, '42401', 0, '2025-07-09', '冷凍', '毫升', '2025-07-03', NULL, '未指定'),
+(26, 6, '542414245', 0, '2025-07-15', '冷凍', '公斤', '2025-07-03', NULL, '未指定'),
+(27, 6, '54254', 0, '2025-07-22', '冷藏', '毫升', '2025-07-03', NULL, '未指定'),
+(28, 6, '524156', 0, '2025-07-28', '冷凍', '毫升', '2025-07-03', NULL, '未指定'),
+(29, 6, 'zxczx', 0, '2025-07-14', '冷凍', '克', '2025-07-03', NULL, '弟弟'),
+(30, 6, '7448', 0, '2025-07-15', '冷凍', '包', '2025-07-03', NULL, '弟弟'),
+(31, 6, '875875', 0, '2025-07-23', '常溫', '克', '2025-07-03', NULL, '弟弟'),
+(32, 6, '45784', 0, '2025-07-08', NULL, '克', '2025-07-03', NULL, '弟弟'),
+(33, 6, '23', NULL, NULL, NULL, '', '2025-07-03', NULL, '弟弟'),
+(34, 5, '大麥片', 88, NULL, NULL, '個', '2025-08-18', NULL, NULL),
+(35, 5, '小麥', 3, NULL, NULL, '個', '2025-08-18', NULL, NULL),
+(36, 6, '高麗菜', 0, '2025-08-18', '常溫', '個', '2025-08-18', NULL, '爸爸'),
+(37, 6, '雞腿', NULL, '2025-08-18', '冷藏', '', '2025-08-18', NULL, '爸爸'),
+(38, 6, '雞胸肉', 0, '2025-08-18', '冷藏', '個', '2025-08-18', NULL, '爸爸'),
+(39, 6, '牛奶', 0, '2025-08-19', '冷藏', '瓶', '2025-08-18', NULL, '爸爸'),
+(40, 6, '迴紋針', 0, '2025-08-18', '常溫', '個', '2025-08-18', NULL, '爸爸'),
+(41, 6, '口香糖', 0, '2025-08-18', '常溫', '包', '2025-08-18', NULL, '爸爸'),
+(42, 6, '太妃糖', 0, '2025-08-18', '常溫', '個', '2025-08-18', NULL, '爸爸'),
+(43, 6, '可樂', 0, '2025-08-19', '冷藏', '瓶', '2025-08-18', NULL, '爸爸'),
+(44, 6, '雞腿', 0, '2025-08-18', '冷藏', '個', '2025-08-18', NULL, '爸爸'),
+(45, 6, '雪碧', 0, '2025-08-18', '冷藏', '瓶', '2025-08-18', NULL, '爸爸'),
+(46, 6, '榴槤', 0, '2025-08-18', '冷凍', '公斤', '2025-08-18', NULL, '爸爸'),
+(47, 6, '狗罐頭', 2, '2025-08-18', '常溫', '個', '2025-08-18', NULL, '爸爸'),
+(48, 6, '金莎', 0, '2025-08-18', '常溫', '個', '2025-08-18', NULL, '爸爸'),
+(49, 6, '火腿腸', 0, '2025-08-18', '常溫', '包', '2025-08-18', NULL, '爸爸'),
+(50, 6, '1u/ 1;4', NULL, NULL, NULL, '', '2025-08-18', NULL, '爸爸'),
+(51, 6, '冰棒', 2, '2025-08-18', '冷凍', '個', '2025-08-18', NULL, '爸爸');
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `ingredientusage`
+-- 資料表結構 `ingredientusage`
 --
--- 创建时间： 2025-07-13 15:11:07
+-- 建立時間： 2025-08-17 18:29:41
+-- 最後更新： 2025-08-18 11:16:49
 --
 
 DROP TABLE IF EXISTS `ingredientusage`;
@@ -222,12 +260,12 @@ CREATE TABLE `ingredientusage` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 插入之前先把表清空（truncate） `ingredientusage`
+-- 資料表新增資料前，先清除舊資料 `ingredientusage`
 --
 
 TRUNCATE TABLE `ingredientusage`;
 --
--- 转存表中的数据 `ingredientusage`
+-- 傾印資料表的資料 `ingredientusage`
 --
 
 INSERT INTO `ingredientusage` (`UsageId`, `IngredientId`, `uId`, `UsedQuantity`, `Unit`, `UsageDate`, `Note`, `Role`) VALUES
@@ -235,14 +273,38 @@ INSERT INTO `ingredientusage` (`UsageId`, `IngredientId`, `uId`, `UsedQuantity`,
 (2, 3, 1, 1, 'g', '2025-05-27', '', NULL),
 (4, 15, 1, 1, 'kg', '2025-05-30', '', NULL),
 (5, 15, 1, 1, 'g', '2025-05-30', '', NULL),
-(6, 16, 1, 1, '瓶', '2025-05-30', '', NULL);
+(6, 16, 1, 1, '瓶', '2025-05-30', '', NULL),
+(7, 22, 6, 7, '個', '2025-08-18', '從過期食材推薦餐點自動消耗', '爸爸'),
+(8, 24, 6, 4, '包', '2025-08-18', '從過期食材推薦餐點自動消耗', '爸爸'),
+(9, 32, 6, 5, '克', '2025-08-18', '從過期食材推薦餐點自動消耗', '爸爸'),
+(10, 25, 6, 4, '毫升', '2025-08-18', '從過期食材推薦餐點自動消耗', '爸爸'),
+(11, 29, 6, 54, '克', '2025-08-18', '從過期食材推薦餐點自動消耗', '爸爸'),
+(12, 30, 6, 8, '包', '2025-08-18', '從過期食材推薦餐點自動消耗', '爸爸'),
+(13, 26, 6, 4, '公斤', '2025-08-18', '從過期食材推薦餐點自動消耗', '爸爸'),
+(14, 27, 6, 4, '毫升', '2025-08-18', '從過期食材推薦餐點自動消耗', '爸爸'),
+(15, 23, 6, 1, '克', '2025-08-18', '從過期食材推薦餐點自動消耗', '爸爸'),
+(16, 31, 6, 6, '克', '2025-08-18', '從過期食材推薦餐點自動消耗', '爸爸'),
+(17, 28, 6, 1, '毫升', '2025-08-18', '從過期食材推薦餐點自動消耗', '爸爸'),
+(18, 36, 6, 7, '個', '2025-08-18', '從過期食材推薦餐點自動消耗', '爸爸'),
+(19, 38, 6, 3, '個', '2025-08-18', '從過期食材推薦餐點自動消耗', '爸爸'),
+(20, 40, 6, 1, '個', '2025-08-18', '從過期食材推薦餐點自動消耗', '爸爸'),
+(21, 39, 6, 1, '瓶', '2025-08-18', '從過期食材推薦餐點自動消耗', '爸爸'),
+(22, 41, 6, 2, '包', '2025-08-18', '製作 口香糖薄荷茶 時消耗', '未指定'),
+(23, 42, 6, 3, '個', '2025-08-18', '製作 太妃糖香蕉奶昔 時消耗', '未指定'),
+(24, 43, 6, 1, '瓶', '2025-08-18', '製作 可樂冰沙 時消耗', '未指定'),
+(25, 46, 6, 3, '公斤', '2025-08-18', '製作 榴槤冰沙 時消耗', '未指定'),
+(26, 44, 6, 3, '個', '2025-08-18', '製作 香煎雞腿佐香料 時消耗', '未指定'),
+(27, 45, 6, 3, '瓶', '2025-08-18', '製作 雪碧水果雞尾酒 時消耗', '未指定'),
+(28, 49, 6, 3, '包', '2025-08-18', '製作 火腿腸冷拌沙拉 時消耗', '未指定'),
+(29, 48, 6, 3, '個', '2025-08-18', '製作 金莎巧克力冰淇淋杯 時消耗', '未指定');
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `notifications`
+-- 資料表結構 `notifications`
 --
--- 创建时间： 2025-07-13 15:11:08
+-- 建立時間： 2025-08-17 18:29:41
+-- 最後更新： 2025-08-18 10:15:03
 --
 
 DROP TABLE IF EXISTS `notifications`;
@@ -259,12 +321,12 @@ CREATE TABLE `notifications` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 插入之前先把表清空（truncate） `notifications`
+-- 資料表新增資料前，先清除舊資料 `notifications`
 --
 
 TRUNCATE TABLE `notifications`;
 --
--- 转存表中的数据 `notifications`
+-- 傾印資料表的資料 `notifications`
 --
 
 INSERT INTO `notifications` (`id`, `user_id`, `type`, `content`, `item_id`, `item_name`, `created_at`, `is_read`, `role`) VALUES
@@ -273,14 +335,31 @@ INSERT INTO `notifications` (`id`, `user_id`, `type`, `content`, `item_id`, `ite
 (3, 6, 'ingredient', '新增了食材', 30, '7448', '2025-07-03 05:19:36', 1, '弟弟'),
 (4, 6, 'ingredient', '新增了食材', 31, '875875', '2025-07-03 05:19:51', 1, '弟弟'),
 (5, 6, 'ingredient', '新增了食材', 32, '45784', '2025-07-03 05:20:02', 1, '弟弟'),
-(6, 6, 'ingredient', '新增了食材', 33, '23', '2025-07-03 05:20:04', 1, '弟弟');
+(6, 6, 'ingredient', '新增了食材', 33, '23', '2025-07-03 05:20:04', 1, '弟弟'),
+(7, 5, 'recipe', '新增了食譜', 35, '雞腿便當', '2025-08-18 07:59:04', 1, '666'),
+(8, 6, 'ingredient', '新增了食材', 36, '高麗菜', '2025-08-18 08:22:28', 1, '爸爸'),
+(9, 6, 'ingredient', '新增了食材', 37, '雞腿', '2025-08-18 09:33:47', 1, '爸爸'),
+(10, 6, 'ingredient', '新增了食材', 38, '雞胸肉', '2025-08-18 09:34:15', 1, '爸爸'),
+(11, 6, 'ingredient', '新增了食材', 39, '牛奶', '2025-08-18 09:34:34', 1, '爸爸'),
+(12, 6, 'ingredient', '新增了食材', 40, '迴紋針', '2025-08-18 09:45:27', 1, '爸爸'),
+(13, 6, 'ingredient', '新增了食材', 41, '口香糖', '2025-08-18 09:46:29', 1, '爸爸'),
+(14, 6, 'ingredient', '新增了食材', 42, '太妃糖', '2025-08-18 09:46:52', 1, '爸爸'),
+(15, 6, 'ingredient', '新增了食材', 43, '可樂', '2025-08-18 09:47:09', 1, '爸爸'),
+(16, 6, 'ingredient', '新增了食材', 44, '雞腿', '2025-08-18 10:08:08', 1, '爸爸'),
+(17, 6, 'ingredient', '新增了食材', 45, '雪碧', '2025-08-18 10:08:24', 1, '爸爸'),
+(18, 6, 'ingredient', '新增了食材', 46, '榴槤', '2025-08-18 10:08:50', 1, '爸爸'),
+(19, 6, 'ingredient', '新增了食材', 47, '狗罐頭', '2025-08-18 10:13:59', 1, '爸爸'),
+(20, 6, 'ingredient', '新增了食材', 48, '金莎', '2025-08-18 10:14:25', 1, '爸爸'),
+(21, 6, 'ingredient', '新增了食材', 49, '火腿腸', '2025-08-18 10:14:46', 1, '爸爸'),
+(22, 6, 'ingredient', '新增了食材', 50, '1u/ 1;4', '2025-08-18 10:14:51', 1, '爸爸'),
+(23, 6, 'ingredient', '新增了食材', 51, '冰棒', '2025-08-18 10:15:03', 1, '爸爸');
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `nutrition_facts`
+-- 資料表結構 `nutrition_facts`
 --
--- 创建时间： 2025-07-13 15:11:04
+-- 建立時間： 2025-08-17 18:29:41
 --
 
 DROP TABLE IF EXISTS `nutrition_facts`;
@@ -301,12 +380,12 @@ CREATE TABLE `nutrition_facts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 插入之前先把表清空（truncate） `nutrition_facts`
+-- 資料表新增資料前，先清除舊資料 `nutrition_facts`
 --
 
 TRUNCATE TABLE `nutrition_facts`;
 --
--- 转存表中的数据 `nutrition_facts`
+-- 傾印資料表的資料 `nutrition_facts`
 --
 
 INSERT INTO `nutrition_facts` (`id`, `food_category`, `sample_name`, `content_description`, `alias`, `kcal`, `protein`, `fat`, `saturated_fat`, `carbohydrate`, `fiber`, `total_sugar`, `sodium`) VALUES
@@ -2499,9 +2578,10 @@ INSERT INTO `nutrition_facts` (`id`, `food_category`, `sample_name`, `content_de
 -- --------------------------------------------------------
 
 --
--- 表的结构 `recipe`
+-- 資料表結構 `recipe`
 --
--- 创建时间： 2025-07-13 15:11:08
+-- 建立時間： 2025-08-17 18:29:41
+-- 最後更新： 2025-08-18 07:59:04
 --
 
 DROP TABLE IF EXISTS `recipe`;
@@ -2518,12 +2598,12 @@ CREATE TABLE `recipe` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 插入之前先把表清空（truncate） `recipe`
+-- 資料表新增資料前，先清除舊資料 `recipe`
 --
 
 TRUNCATE TABLE `recipe`;
 --
--- 转存表中的数据 `recipe`
+-- 傾印資料表的資料 `recipe`
 --
 
 INSERT INTO `recipe` (`RecipeId`, `rName`, `cooktime`, `DifficultyLevel`, `Description`, `uId`, `UploadDate`, `CoverImage`, `ViewCount`) VALUES
@@ -2533,21 +2613,23 @@ INSERT INTO `recipe` (`RecipeId`, `rName`, `cooktime`, `DifficultyLevel`, `Descr
 (23, '日式炸豬排咖哩飯', 40, '中等', '炸豬排咖哩飯', 4, '2025-06-04 06:35:20', 'uploads/1748493184_curry.jpg', 4),
 (24, '蛋包飯', 30, '中等', '蛋包飯', 4, '2025-06-04 06:42:27', 'uploads/1748500756_images.jpg', 1),
 (25, '蝦仁炒飯', 20, '簡單', '炒飯', 4, '2025-06-04 06:51:54', 'Uploads/240506-12480-5-jAmY0.jpg', 0),
-(26, '蒙古烤肉', 25, '中等', '來自蒙古的烤肉', 4, '2025-06-04 07:12:56', 'uploads/cc713049f0a0eb10.jpg', 18),
+(26, '蒙古烤肉', 25, '中等', '來自蒙古的烤肉', 4, '2025-06-04 07:12:56', 'uploads/cc713049f0a0eb10.jpg', 20),
 (27, '炒麵', 25, '簡單', '炒麵', 4, '2025-06-04 09:02:02', 'Uploads/33cda7b1f07faebf.jpg', 1),
 (28, '玉子燒', 15, '中等', '燒', 4, '2025-06-04 09:08:12', 'Uploads/1716788745758599161.jpg', 0),
-(29, '起司蛋糕', 90, '中等', '好吃蛋糕', 4, '2025-06-04 09:20:14', 'Uploads/19-OM-141.jpg', 2),
+(29, '起司蛋糕', 90, '中等', '好吃蛋糕', 4, '2025-06-04 09:20:14', 'Uploads/19-OM-141.jpg', 3),
 (30, '牛肉丼飯', 25, '簡單', '牛肉', 4, '2025-06-04 09:30:24', 'Uploads/1200px-Gyuu-don_001.jpg', 1),
-(31, '安息雞（Pullum Frontonianum）', 75, '困難', '本身料理並不難，而是食材取得較難。', 4, '2025-06-04 09:53:47', 'Uploads/chicken-fronto2.jpg', 7),
-(32, '桂格超大麵包', 800, '困難', '桂格超大麵包', 5, '2025-06-04 14:17:38', '0', 7),
-(33, '馬鈴薯燉肉', 25, '簡單', '000', 1, '2025-06-04 15:17:25', 'Uploads/1749695804_1748500756_images.jpg', 4);
+(31, '安息雞（Pullum Frontonianum）', 75, '困難', '本身料理並不難，而是食材取得較難。', 4, '2025-06-04 09:53:47', 'Uploads/chicken-fronto2.jpg', 8),
+(32, '桂格超大麵包', 800, '困難', '桂格超大麵包', 5, '2025-06-04 14:17:38', '0', 13),
+(33, '馬鈴薯燉肉', 25, '簡單', '000', 1, '2025-06-04 15:17:25', 'Uploads/1749695804_1748500756_images.jpg', 5),
+(35, '雞腿便當', 60, '簡單', NULL, 5, '2025-08-18 07:59:04', NULL, 1);
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `recipeingredient`
+-- 資料表結構 `recipeingredient`
 --
--- 创建时间： 2025-07-13 15:11:08
+-- 建立時間： 2025-08-17 18:29:41
+-- 最後更新： 2025-08-18 07:59:04
 --
 
 DROP TABLE IF EXISTS `recipeingredient`;
@@ -2559,12 +2641,12 @@ CREATE TABLE `recipeingredient` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 插入之前先把表清空（truncate） `recipeingredient`
+-- 資料表新增資料前，先清除舊資料 `recipeingredient`
 --
 
 TRUNCATE TABLE `recipeingredient`;
 --
--- 转存表中的数据 `recipeingredient`
+-- 傾印資料表的資料 `recipeingredient`
 --
 
 INSERT INTO `recipeingredient` (`RecipeId`, `IngredientName`, `Quantity`, `Unit`) VALUES
@@ -2672,14 +2754,18 @@ INSERT INTO `recipeingredient` (`RecipeId`, `IngredientName`, `Quantity`, `Unit`
 (31, '黑胡椒粉', 5, '克'),
 (32, '大麥片', 88, '個'),
 (32, '小麥', 3, '個'),
-(33, '小米', 5, '公斤');
+(32, '義大利麵加混泥土', 0, '公斤'),
+(33, '小米', 5, '公斤'),
+(35, '便當', 1, '個'),
+(35, '雞腿', 1, '個');
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `recipesteps`
+-- 資料表結構 `recipesteps`
 --
--- 创建时间： 2025-07-13 15:11:08
+-- 建立時間： 2025-08-17 18:29:41
+-- 最後更新： 2025-08-18 07:59:04
 --
 
 DROP TABLE IF EXISTS `recipesteps`;
@@ -2691,12 +2777,12 @@ CREATE TABLE `recipesteps` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 插入之前先把表清空（truncate） `recipesteps`
+-- 資料表新增資料前，先清除舊資料 `recipesteps`
 --
 
 TRUNCATE TABLE `recipesteps`;
 --
--- 转存表中的数据 `recipesteps`
+-- 傾印資料表的資料 `recipesteps`
 --
 
 INSERT INTO `recipesteps` (`RecipeId`, `StepOrder`, `StepDescription`, `StepImage`) VALUES
@@ -2771,14 +2857,18 @@ INSERT INTO `recipesteps` (`RecipeId`, `StepOrder`, `StepDescription`, `StepImag
 (31, 4, '完成後取出，稍微冷卻後即可享用。可搭配蒸豆、熟蔬菜等一同食用。', NULL),
 (32, 1, '把小麥放到合成台上', NULL),
 (32, 2, '吃掉他', NULL),
-(33, 1, '12', NULL);
+(32, 3, '站在桌子上開始托馬斯迴旋', NULL),
+(33, 1, '12', NULL),
+(35, 1, '把雞腿跟便當煮好', NULL),
+(35, 2, '把雞腿放在便當上面', NULL);
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `recipetags`
+-- 資料表結構 `recipetags`
 --
--- 创建时间： 2025-07-13 15:11:09
+-- 建立時間： 2025-08-17 18:29:41
+-- 最後更新： 2025-08-18 07:59:04
 --
 
 DROP TABLE IF EXISTS `recipetags`;
@@ -2789,26 +2879,27 @@ CREATE TABLE `recipetags` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 插入之前先把表清空（truncate） `recipetags`
+-- 資料表新增資料前，先清除舊資料 `recipetags`
 --
 
 TRUNCATE TABLE `recipetags`;
 --
--- 转存表中的数据 `recipetags`
+-- 傾印資料表的資料 `recipetags`
 --
 
 INSERT INTO `recipetags` (`id`, `RecipeId`, `Tag`) VALUES
 (9, 22, '[{\"value\":\"日式料理\"}]'),
 (10, 23, '[{\"value\":\"日式料理\"}]'),
 (13, 31, '[{\"value\":\"古代料理\"}]'),
-(15, 32, '[{\"value\":\"奇怪的料理\"}]');
+(17, 32, '[{\"value\":\"奇怪的料理\"}]'),
+(18, 35, '[{\"value\":\"我的午餐\"}]');
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `recipe_favorites`
+-- 資料表結構 `recipe_favorites`
 --
--- 创建时间： 2025-07-13 15:11:09
+-- 建立時間： 2025-08-17 18:29:41
 --
 
 DROP TABLE IF EXISTS `recipe_favorites`;
@@ -2820,16 +2911,16 @@ CREATE TABLE `recipe_favorites` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 插入之前先把表清空（truncate） `recipe_favorites`
+-- 資料表新增資料前，先清除舊資料 `recipe_favorites`
 --
 
 TRUNCATE TABLE `recipe_favorites`;
 -- --------------------------------------------------------
 
 --
--- 表的结构 `recipe_likes`
+-- 資料表結構 `recipe_likes`
 --
--- 创建时间： 2025-07-13 15:11:09
+-- 建立時間： 2025-08-17 18:29:41
 --
 
 DROP TABLE IF EXISTS `recipe_likes`;
@@ -2841,12 +2932,12 @@ CREATE TABLE `recipe_likes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 插入之前先把表清空（truncate） `recipe_likes`
+-- 資料表新增資料前，先清除舊資料 `recipe_likes`
 --
 
 TRUNCATE TABLE `recipe_likes`;
 --
--- 转存表中的数据 `recipe_likes`
+-- 傾印資料表的資料 `recipe_likes`
 --
 
 INSERT INTO `recipe_likes` (`LikeId`, `RecipeId`, `UserId`, `LikedAt`) VALUES
@@ -2856,9 +2947,9 @@ INSERT INTO `recipe_likes` (`LikeId`, `RecipeId`, `UserId`, `LikedAt`) VALUES
 -- --------------------------------------------------------
 
 --
--- 表的结构 `reviews`
+-- 資料表結構 `reviews`
 --
--- 创建时间： 2025-07-13 15:11:09
+-- 建立時間： 2025-08-17 18:29:41
 --
 
 DROP TABLE IF EXISTS `reviews`;
@@ -2872,16 +2963,17 @@ CREATE TABLE `reviews` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 插入之前先把表清空（truncate） `reviews`
+-- 資料表新增資料前，先清除舊資料 `reviews`
 --
 
 TRUNCATE TABLE `reviews`;
 -- --------------------------------------------------------
 
 --
--- 表的结构 `shoppingitem`
+-- 資料表結構 `shoppingitem`
 --
--- 创建时间： 2025-07-13 15:11:09
+-- 建立時間： 2025-08-17 18:29:41
+-- 最後更新： 2025-08-18 07:50:00
 --
 
 DROP TABLE IF EXISTS `shoppingitem`;
@@ -2895,12 +2987,12 @@ CREATE TABLE `shoppingitem` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 插入之前先把表清空（truncate） `shoppingitem`
+-- 資料表新增資料前，先清除舊資料 `shoppingitem`
 --
 
 TRUNCATE TABLE `shoppingitem`;
 --
--- 转存表中的数据 `shoppingitem`
+-- 傾印資料表的資料 `shoppingitem`
 --
 
 INSERT INTO `shoppingitem` (`ItemId`, `ShoppingId`, `Quantity`, `Price`, `Unit`, `IngredientName`) VALUES
@@ -2914,14 +3006,24 @@ INSERT INTO `shoppingitem` (`ItemId`, `ShoppingId`, `Quantity`, `Price`, `Unit`,
 (32, 17, 1, 60, '瓶', '醬油'),
 (33, 17, 5, 2, '瓣', '蒜頭'),
 (34, 17, 2, 25, '盒', '豆腐'),
-(35, 18, 21, 213, '個', 'hgj');
+(35, 18, 21, 213, '個', 'hgj'),
+(36, 19, 15, NULL, '毫升', '味醂'),
+(37, 19, 1, NULL, '個', '洋蔥'),
+(38, 19, 200, NULL, '克', '牛肉片'),
+(39, 19, 1, NULL, '個', '紅蘿蔔'),
+(40, 19, 10, NULL, '克', '蒜頭'),
+(41, 19, 1, NULL, '個', '青蔥'),
+(42, 19, 150, NULL, '克', '高麗菜'),
+(43, 20, 88, NULL, '個', '大麥片'),
+(44, 20, 3, NULL, '個', '小麥');
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `shoppinglist`
+-- 資料表結構 `shoppinglist`
 --
--- 创建时间： 2025-07-13 15:11:09
+-- 建立時間： 2025-08-17 18:29:41
+-- 最後更新： 2025-08-18 07:50:03
 --
 
 DROP TABLE IF EXISTS `shoppinglist`;
@@ -2934,24 +3036,26 @@ CREATE TABLE `shoppinglist` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 插入之前先把表清空（truncate） `shoppinglist`
+-- 資料表新增資料前，先清除舊資料 `shoppinglist`
 --
 
 TRUNCATE TABLE `shoppinglist`;
 --
--- 转存表中的数据 `shoppinglist`
+-- 傾印資料表的資料 `shoppinglist`
 --
 
 INSERT INTO `shoppinglist` (`ShoppingId`, `uId`, `CreateDate`, `IsCompleted`, `ListName`) VALUES
 (17, 1, '2025-06-04', 0, '購物清單展示'),
-(18, 6, '2025-07-03', 0, 'ghjh');
+(18, 6, '2025-07-03', 0, 'ghjh'),
+(19, 6, '2025-08-18', 0, '為『蒙古烤肉』生成的購物清單 - 2025-08-17'),
+(20, 5, '2025-08-18', 1, '為『桂格超大麵包』生成的購物清單 - 2025-08-18');
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `user`
+-- 資料表結構 `user`
 --
--- 创建时间： 2025-07-13 15:11:06
+-- 建立時間： 2025-08-17 18:29:41
 --
 
 DROP TABLE IF EXISTS `user`;
@@ -2965,12 +3069,12 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 插入之前先把表清空（truncate） `user`
+-- 資料表新增資料前，先清除舊資料 `user`
 --
 
 TRUNCATE TABLE `user`;
 --
--- 转存表中的数据 `user`
+-- 傾印資料表的資料 `user`
 --
 
 INSERT INTO `user` (`uId`, `uName`, `Password`, `Email`, `Language`, `uImage`) VALUES
@@ -2983,10 +3087,10 @@ INSERT INTO `user` (`uId`, `uName`, `Password`, `Email`, `Language`, `uImage`) V
 -- --------------------------------------------------------
 
 --
--- 表的结构 `user_calorie_goal`
+-- 資料表結構 `user_calorie_goal`
 --
--- 创建时间： 2025-07-13 15:11:10
--- 最后更新： 2025-08-03 12:32:44
+-- 建立時間： 2025-08-17 18:29:41
+-- 最後更新： 2025-08-18 07:43:43
 --
 
 DROP TABLE IF EXISTS `user_calorie_goal`;
@@ -3002,12 +3106,12 @@ CREATE TABLE `user_calorie_goal` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 插入之前先把表清空（truncate） `user_calorie_goal`
+-- 資料表新增資料前，先清除舊資料 `user_calorie_goal`
 --
 
 TRUNCATE TABLE `user_calorie_goal`;
 --
--- 转存表中的数据 `user_calorie_goal`
+-- 傾印資料表的資料 `user_calorie_goal`
 --
 
 INSERT INTO `user_calorie_goal` (`id`, `user_id`, `calorie_goal`, `gender`, `age`, `height`, `weight`, `updated_at`) VALUES
@@ -3021,15 +3125,17 @@ INSERT INTO `user_calorie_goal` (`id`, `user_id`, `calorie_goal`, `gender`, `age
 (8, 1, 2575, 'male', 25, 175, 78, '2025-08-03 20:32:10'),
 (9, 1, 2575, 'male', 25, 175, 78, '2025-08-03 20:32:27'),
 (10, 1, 2575, 'male', 25, 175, 78, '2025-08-03 20:32:37'),
-(11, 1, 2575, 'male', 25, 175, 78, '2025-08-03 20:32:44');
+(11, 1, 2575, 'male', 25, 175, 78, '2025-08-03 20:32:44'),
+(12, 6, 2620, 'male', 18, 180, 75, '2025-08-18 02:31:24'),
+(13, 5, 2524, 'male', 18, 180, 70, '2025-08-18 15:43:43');
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `user_nutrition_goal`
+-- 資料表結構 `user_nutrition_goal`
 --
--- 创建时间： 2025-08-03 10:26:21
--- 最后更新： 2025-08-03 12:32:44
+-- 建立時間： 2025-08-17 18:29:41
+-- 最後更新： 2025-08-18 07:43:43
 --
 
 DROP TABLE IF EXISTS `user_nutrition_goal`;
@@ -3045,23 +3151,26 @@ CREATE TABLE `user_nutrition_goal` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 插入之前先把表清空（truncate） `user_nutrition_goal`
+-- 資料表新增資料前，先清除舊資料 `user_nutrition_goal`
 --
 
 TRUNCATE TABLE `user_nutrition_goal`;
 --
--- 转存表中的数据 `user_nutrition_goal`
+-- 傾印資料表的資料 `user_nutrition_goal`
 --
 
 INSERT INTO `user_nutrition_goal` (`id`, `user_id`, `protein_goal`, `fat_goal`, `carb_goal`, `fiber_goal`, `created_at`, `updated_at`) VALUES
-(1, 1, 120.6, 80.4, 301.4, 33.8, '2025-08-03 12:28:40', '2025-08-03 12:32:44');
+(1, 1, 120.6, 80.4, 301.4, 33.8, '2025-08-03 12:28:40', '2025-08-03 12:32:44'),
+(3, 6, 123.1, 82, 307.7, 34.5, '2025-08-17 18:31:24', '2025-08-17 18:31:24'),
+(4, 5, 119.6, 79.8, 299.1, 33.5, '2025-08-18 07:43:43', '2025-08-18 07:43:43');
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `user_roles`
+-- 資料表結構 `user_roles`
 --
--- 创建时间： 2025-07-13 15:11:10
+-- 建立時間： 2025-08-17 18:29:41
+-- 最後更新： 2025-08-18 07:43:28
 --
 
 DROP TABLE IF EXISTS `user_roles`;
@@ -3072,40 +3181,42 @@ CREATE TABLE `user_roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 插入之前先把表清空（truncate） `user_roles`
+-- 資料表新增資料前，先清除舊資料 `user_roles`
 --
 
 TRUNCATE TABLE `user_roles`;
 --
--- 转存表中的数据 `user_roles`
+-- 傾印資料表的資料 `user_roles`
 --
 
 INSERT INTO `user_roles` (`id`, `user_id`, `role_name`) VALUES
 (1, 1, '爸爸'),
 (4, 1, '媽媽'),
 (5, 1, '弟弟'),
-(6, 6, '弟弟');
+(6, 6, '弟弟'),
+(7, 6, '爸爸'),
+(8, 5, '666');
 
 --
--- 转储表的索引
+-- 已傾印資料表的索引
 --
 
 --
--- 表的索引 `calorie_records`
+-- 資料表索引 `calorie_records`
 --
 ALTER TABLE `calorie_records`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`);
 
 --
--- 表的索引 `family`
+-- 資料表索引 `family`
 --
 ALTER TABLE `family`
   ADD PRIMARY KEY (`familyId`),
   ADD KEY `createdBy` (`createdBy`);
 
 --
--- 表的索引 `family_member`
+-- 資料表索引 `family_member`
 --
 ALTER TABLE `family_member`
   ADD PRIMARY KEY (`id`),
@@ -3114,21 +3225,21 @@ ALTER TABLE `family_member`
   ADD KEY `role` (`role`);
 
 --
--- 表的索引 `family_roles`
+-- 資料表索引 `family_roles`
 --
 ALTER TABLE `family_roles`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `role_name` (`role_name`);
 
 --
--- 表的索引 `ingredient`
+-- 資料表索引 `ingredient`
 --
 ALTER TABLE `ingredient`
   ADD PRIMARY KEY (`IngredientId`),
   ADD KEY `uId` (`uId`);
 
 --
--- 表的索引 `ingredientusage`
+-- 資料表索引 `ingredientusage`
 --
 ALTER TABLE `ingredientusage`
   ADD PRIMARY KEY (`UsageId`),
@@ -3136,46 +3247,46 @@ ALTER TABLE `ingredientusage`
   ADD KEY `uId` (`uId`);
 
 --
--- 表的索引 `notifications`
+-- 資料表索引 `notifications`
 --
 ALTER TABLE `notifications`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`);
 
 --
--- 表的索引 `nutrition_facts`
+-- 資料表索引 `nutrition_facts`
 --
 ALTER TABLE `nutrition_facts`
   ADD PRIMARY KEY (`id`);
 
 --
--- 表的索引 `recipe`
+-- 資料表索引 `recipe`
 --
 ALTER TABLE `recipe`
   ADD PRIMARY KEY (`RecipeId`),
   ADD KEY `uId` (`uId`);
 
 --
--- 表的索引 `recipeingredient`
+-- 資料表索引 `recipeingredient`
 --
 ALTER TABLE `recipeingredient`
   ADD PRIMARY KEY (`RecipeId`,`IngredientName`);
 
 --
--- 表的索引 `recipesteps`
+-- 資料表索引 `recipesteps`
 --
 ALTER TABLE `recipesteps`
   ADD PRIMARY KEY (`RecipeId`,`StepOrder`);
 
 --
--- 表的索引 `recipetags`
+-- 資料表索引 `recipetags`
 --
 ALTER TABLE `recipetags`
   ADD PRIMARY KEY (`id`),
   ADD KEY `RecipeId` (`RecipeId`);
 
 --
--- 表的索引 `recipe_favorites`
+-- 資料表索引 `recipe_favorites`
 --
 ALTER TABLE `recipe_favorites`
   ADD PRIMARY KEY (`id`),
@@ -3183,7 +3294,7 @@ ALTER TABLE `recipe_favorites`
   ADD KEY `RecipeId` (`RecipeId`);
 
 --
--- 表的索引 `recipe_likes`
+-- 資料表索引 `recipe_likes`
 --
 ALTER TABLE `recipe_likes`
   ADD PRIMARY KEY (`LikeId`),
@@ -3191,7 +3302,7 @@ ALTER TABLE `recipe_likes`
   ADD KEY `UserId` (`UserId`);
 
 --
--- 表的索引 `reviews`
+-- 資料表索引 `reviews`
 --
 ALTER TABLE `reviews`
   ADD PRIMARY KEY (`ReviewId`),
@@ -3199,182 +3310,182 @@ ALTER TABLE `reviews`
   ADD KEY `UserId` (`UserId`);
 
 --
--- 表的索引 `shoppingitem`
+-- 資料表索引 `shoppingitem`
 --
 ALTER TABLE `shoppingitem`
   ADD PRIMARY KEY (`ItemId`),
   ADD KEY `ShoppingId` (`ShoppingId`);
 
 --
--- 表的索引 `shoppinglist`
+-- 資料表索引 `shoppinglist`
 --
 ALTER TABLE `shoppinglist`
   ADD PRIMARY KEY (`ShoppingId`),
   ADD KEY `uId` (`uId`);
 
 --
--- 表的索引 `user`
+-- 資料表索引 `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`uId`);
 
 --
--- 表的索引 `user_calorie_goal`
+-- 資料表索引 `user_calorie_goal`
 --
 ALTER TABLE `user_calorie_goal`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`);
 
 --
--- 表的索引 `user_nutrition_goal`
+-- 資料表索引 `user_nutrition_goal`
 --
 ALTER TABLE `user_nutrition_goal`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`);
 
 --
--- 表的索引 `user_roles`
+-- 資料表索引 `user_roles`
 --
 ALTER TABLE `user_roles`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`);
 
 --
--- 在导出的表使用AUTO_INCREMENT
+-- 在傾印的資料表使用自動遞增(AUTO_INCREMENT)
 --
 
 --
--- 使用表AUTO_INCREMENT `calorie_records`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `calorie_records`
 --
 ALTER TABLE `calorie_records`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
 
 --
--- 使用表AUTO_INCREMENT `family`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `family`
 --
 ALTER TABLE `family`
   MODIFY `familyId` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- 使用表AUTO_INCREMENT `family_member`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `family_member`
 --
 ALTER TABLE `family_member`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- 使用表AUTO_INCREMENT `family_roles`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `family_roles`
 --
 ALTER TABLE `family_roles`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- 使用表AUTO_INCREMENT `ingredient`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `ingredient`
 --
 ALTER TABLE `ingredient`
-  MODIFY `IngredientId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `IngredientId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
--- 使用表AUTO_INCREMENT `ingredientusage`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `ingredientusage`
 --
 ALTER TABLE `ingredientusage`
-  MODIFY `UsageId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `UsageId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
--- 使用表AUTO_INCREMENT `notifications`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- 使用表AUTO_INCREMENT `nutrition_facts`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `nutrition_facts`
 --
 ALTER TABLE `nutrition_facts`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2181;
 
 --
--- 使用表AUTO_INCREMENT `recipe`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `recipe`
 --
 ALTER TABLE `recipe`
-  MODIFY `RecipeId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `RecipeId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
--- 使用表AUTO_INCREMENT `recipetags`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `recipetags`
 --
 ALTER TABLE `recipetags`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- 使用表AUTO_INCREMENT `recipe_favorites`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `recipe_favorites`
 --
 ALTER TABLE `recipe_favorites`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- 使用表AUTO_INCREMENT `recipe_likes`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `recipe_likes`
 --
 ALTER TABLE `recipe_likes`
   MODIFY `LikeId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- 使用表AUTO_INCREMENT `reviews`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `reviews`
 --
 ALTER TABLE `reviews`
   MODIFY `ReviewId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- 使用表AUTO_INCREMENT `shoppingitem`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `shoppingitem`
 --
 ALTER TABLE `shoppingitem`
-  MODIFY `ItemId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `ItemId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
--- 使用表AUTO_INCREMENT `shoppinglist`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `shoppinglist`
 --
 ALTER TABLE `shoppinglist`
-  MODIFY `ShoppingId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `ShoppingId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- 使用表AUTO_INCREMENT `user`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `user`
 --
 ALTER TABLE `user`
   MODIFY `uId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- 使用表AUTO_INCREMENT `user_calorie_goal`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `user_calorie_goal`
 --
 ALTER TABLE `user_calorie_goal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- 使用表AUTO_INCREMENT `user_nutrition_goal`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `user_nutrition_goal`
 --
 ALTER TABLE `user_nutrition_goal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- 使用表AUTO_INCREMENT `user_roles`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `user_roles`
 --
 ALTER TABLE `user_roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- 限制导出的表
+-- 已傾印資料表的限制式
 --
 
 --
--- 限制表 `calorie_records`
+-- 資料表的限制式 `calorie_records`
 --
 ALTER TABLE `calorie_records`
   ADD CONSTRAINT `calorie_records_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`uId`) ON DELETE CASCADE;
 
 --
--- 限制表 `family`
+-- 資料表的限制式 `family`
 --
 ALTER TABLE `family`
   ADD CONSTRAINT `family_ibfk_1` FOREIGN KEY (`createdBy`) REFERENCES `user` (`uId`);
 
 --
--- 限制表 `family_member`
+-- 資料表的限制式 `family_member`
 --
 ALTER TABLE `family_member`
   ADD CONSTRAINT `family_member_ibfk_1` FOREIGN KEY (`uId`) REFERENCES `user` (`uId`),
@@ -3382,95 +3493,95 @@ ALTER TABLE `family_member`
   ADD CONSTRAINT `family_member_ibfk_3` FOREIGN KEY (`role`) REFERENCES `family_roles` (`role_name`);
 
 --
--- 限制表 `ingredient`
+-- 資料表的限制式 `ingredient`
 --
 ALTER TABLE `ingredient`
   ADD CONSTRAINT `ingredient_ibfk_1` FOREIGN KEY (`uId`) REFERENCES `user` (`uId`);
 
 --
--- 限制表 `ingredientusage`
+-- 資料表的限制式 `ingredientusage`
 --
 ALTER TABLE `ingredientusage`
   ADD CONSTRAINT `ingredientusage_ibfk_1` FOREIGN KEY (`IngredientId`) REFERENCES `ingredient` (`IngredientId`),
   ADD CONSTRAINT `ingredientusage_ibfk_2` FOREIGN KEY (`uId`) REFERENCES `user` (`uId`);
 
 --
--- 限制表 `notifications`
+-- 資料表的限制式 `notifications`
 --
 ALTER TABLE `notifications`
   ADD CONSTRAINT `notifications_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`uId`) ON DELETE CASCADE;
 
 --
--- 限制表 `recipe`
+-- 資料表的限制式 `recipe`
 --
 ALTER TABLE `recipe`
   ADD CONSTRAINT `recipe_ibfk_1` FOREIGN KEY (`uId`) REFERENCES `user` (`uId`);
 
 --
--- 限制表 `recipeingredient`
+-- 資料表的限制式 `recipeingredient`
 --
 ALTER TABLE `recipeingredient`
   ADD CONSTRAINT `recipeingredient_ibfk_1` FOREIGN KEY (`RecipeId`) REFERENCES `recipe` (`RecipeId`);
 
 --
--- 限制表 `recipesteps`
+-- 資料表的限制式 `recipesteps`
 --
 ALTER TABLE `recipesteps`
   ADD CONSTRAINT `recipesteps_ibfk_1` FOREIGN KEY (`RecipeId`) REFERENCES `recipe` (`RecipeId`) ON DELETE CASCADE;
 
 --
--- 限制表 `recipetags`
+-- 資料表的限制式 `recipetags`
 --
 ALTER TABLE `recipetags`
   ADD CONSTRAINT `recipetags_ibfk_1` FOREIGN KEY (`RecipeId`) REFERENCES `recipe` (`RecipeId`) ON DELETE CASCADE;
 
 --
--- 限制表 `recipe_favorites`
+-- 資料表的限制式 `recipe_favorites`
 --
 ALTER TABLE `recipe_favorites`
   ADD CONSTRAINT `recipe_favorites_ibfk_1` FOREIGN KEY (`UserId`) REFERENCES `user` (`uId`) ON DELETE CASCADE,
   ADD CONSTRAINT `recipe_favorites_ibfk_2` FOREIGN KEY (`RecipeId`) REFERENCES `recipe` (`RecipeId`) ON DELETE CASCADE;
 
 --
--- 限制表 `recipe_likes`
+-- 資料表的限制式 `recipe_likes`
 --
 ALTER TABLE `recipe_likes`
   ADD CONSTRAINT `recipe_likes_ibfk_1` FOREIGN KEY (`RecipeId`) REFERENCES `recipe` (`RecipeId`) ON DELETE CASCADE,
   ADD CONSTRAINT `recipe_likes_ibfk_2` FOREIGN KEY (`UserId`) REFERENCES `user` (`uId`) ON DELETE CASCADE;
 
 --
--- 限制表 `reviews`
+-- 資料表的限制式 `reviews`
 --
 ALTER TABLE `reviews`
   ADD CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`RecipeId`) REFERENCES `recipe` (`RecipeId`),
   ADD CONSTRAINT `reviews_ibfk_2` FOREIGN KEY (`UserId`) REFERENCES `user` (`uId`);
 
 --
--- 限制表 `shoppingitem`
+-- 資料表的限制式 `shoppingitem`
 --
 ALTER TABLE `shoppingitem`
   ADD CONSTRAINT `shoppingitem_ibfk_1` FOREIGN KEY (`ShoppingId`) REFERENCES `shoppinglist` (`ShoppingId`);
 
 --
--- 限制表 `shoppinglist`
+-- 資料表的限制式 `shoppinglist`
 --
 ALTER TABLE `shoppinglist`
   ADD CONSTRAINT `shoppinglist_ibfk_1` FOREIGN KEY (`uId`) REFERENCES `user` (`uId`);
 
 --
--- 限制表 `user_calorie_goal`
+-- 資料表的限制式 `user_calorie_goal`
 --
 ALTER TABLE `user_calorie_goal`
   ADD CONSTRAINT `user_calorie_goal_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`uId`) ON DELETE CASCADE;
 
 --
--- 限制表 `user_nutrition_goal`
+-- 資料表的限制式 `user_nutrition_goal`
 --
 ALTER TABLE `user_nutrition_goal`
   ADD CONSTRAINT `user_nutrition_goal_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`uId`) ON DELETE CASCADE;
 
 --
--- 限制表 `user_roles`
+-- 資料表的限制式 `user_roles`
 --
 ALTER TABLE `user_roles`
   ADD CONSTRAINT `user_roles_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`uId`) ON DELETE CASCADE;
